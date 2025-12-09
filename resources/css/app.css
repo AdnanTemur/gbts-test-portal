@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
+
+    --color-army-green-50: #f0f9f4;
+    --color-army-green-100: #dbf0e3;
+    --color-army-green-200: #b9e1ca;
+    --color-army-green-300: #8bcbaa;
+    --color-army-green-400: #58ad84;
+    --color-army-green-500: #3a9168;
+    --color-army-green-600: #2a7453;
+    --color-army-green-700: #225d44;
+    --color-army-green-800: #1d4a37;
+    --color-army-green-900: #193d2f;
+}
+
+.section-timer {
+    @apply fixed top-20 right-4 bg-white shadow-lg rounded-lg p-4 z-50;
+}
+
+.question-card {
+    @apply bg-white rounded-lg shadow-md p-6 mb-4;
+}
+
+.option-button {
+    @apply w-full text-left p-4 border-2 rounded-lg transition-all cursor-pointer;
+}
+
+.option-button:hover {
+    @apply border-army-green-600 bg-army-green-50;
+}
+
+.option-button.selected {
+    @apply border-army-green-600 bg-army-green-100;
+}
+
+.matching-dropdown {
+    @apply w-full p-2 border-2 border-gray-300 rounded-lg;
+}
+
+button:hover {
+    cursor: pointer;
+}
