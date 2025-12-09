@@ -2,9 +2,6 @@ import './bootstrap';
 import Alpine from 'alpinejs';
 import ApexCharts from 'apexcharts';
 
-window.Alpine = Alpine;
-Alpine.start();
-
 window.ApexCharts = ApexCharts;
 
 // Section timer component
@@ -68,3 +65,6 @@ window.saveAnswer = function(token, questionId, data) {
     })
     .catch(error => console.error('Error:', error));
 };
+
+window.Alpine = Alpine;
+Alpine.start();
