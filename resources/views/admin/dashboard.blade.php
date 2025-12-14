@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="mb-8">
-        <h1 class="text-3xl font-bold text-gray-900">Dashboard</h1>
+        <h1 class="text-3xl font-bold text-army-green-700">Dashboard</h1>
         <p class="text-gray-600 mt-1">Welcome back! Here's what's happening with your tests today.</p>
     </div>
 

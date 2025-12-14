@@ -38,158 +38,34 @@ class ReportService
     }
 
     /**
-     * Get category-wise report
-     */
-    // public function getCategoryReport($testVersionId = null)
-    // {
-    //     $query = TestAttempt::where('status', 'completed');
-
-    //     if ($testVersionId) {
-    //         $query->where('test_version_id', $testVersionId);
-    //     }
-
-    //     $attempts = $query->with('sectionAttempts.testSection')->get();
-
-    //     $sections = [];
-    //     foreach ($attempts->first()->sectionAttempts ?? [] as $sectionAttempt) {
-    //         $sectionId = $sectionAttempt->test_section_id;
-    //         $sectionName = $sectionAttempt->testSection->name;
-
-    //         if (!isset($sections[$sectionId])) {
-    //             $sections[$sectionId] = [
-    //                 'name' => $sectionName,
-    //                 'total_attempts' => 0,
-    //                 'total_questions' => 0,
-    //                 'total_correct' => 0,
-    //                 'average_percentage' => 0,
-    //             ];
-    //         }
-
-    //         foreach ($attempts as $attempt) {
-    //             $sectionData = $attempt->sectionAttempts()
-    //                 ->where('test_section_id', $sectionId)
-    //                 ->first();
-
-    //             if ($sectionData) {
-    //                 $sections[$sectionId]['total_attempts']++;
-    //                 $sections[$sectionId]['total_questions'] += $sectionData->total_questions;
-    //                 $sections[$sectionId]['total_correct'] += $sectionData->correct_answers;
-    //             }
-    //         }
-
-    //         if ($sections[$sectionId]['total_questions'] > 0) {
-    //             $sections[$sectionId]['average_percentage'] = round(
-    //                 ($sections[$sectionId]['total_correct'] / $sections[$sectionId]['total_questions']) * 100,
-    //                 2
-    //             );
-    //         }
-    //     }
-
-    //     // Get most missed questions per section
-    //     $missedQuestions = $this->getMostMissedQuestions($testVersionId);
-
-    //     return [
-    //         'sections' => array_values($sections),
-    //         'missed_questions' => $missedQuestions,
-    //     ];
-    // }
-
-    /**
      * Get top 10 most missed questions per section
      */
-    public function getMostMissedQuestions($testVersionId = null, $limit = 10)
+    public function getMostMissedQuestions($sectionId, $limit = 10)
     {
         $query = DB::table('candidate_answers')
             ->join('questions', 'questions.id', '=', 'candidate_answers.question_id')
-            ->join('test_sections', 'test_sections.id', '=', 'questions.test_section_id')
             ->join('test_attempts', 'test_attempts.id', '=', 'candidate_answers.test_attempt_id')
             ->where('test_attempts.status', 'completed')
-            ->where('candidate_answers.is_correct', false);
-
-        if ($testVersionId) {
-            $query->where('test_attempts.test_version_id', $testVersionId);
-        }
+            ->where('candidate_answers.is_correct', false)
+            ->where('questions.test_section_id', $sectionId);
 
         $missedQuestions = $query
             ->select(
                 'questions.id',
                 'questions.question_text',
-                'test_sections.name as section_name',
+                'questions.question_type',
+                'questions.difficulty_level',
                 DB::raw('COUNT(*) as miss_count'),
                 DB::raw('COUNT(*) * 100.0 / (SELECT COUNT(*) FROM candidate_answers ca2 WHERE ca2.question_id = questions.id) as miss_percentage')
             )
-            ->groupBy('questions.id', 'questions.question_text', 'test_sections.name')
+            ->groupBy('questions.id', 'questions.question_text', 'questions.question_type', 'questions.difficulty_level')
             ->orderBy('miss_count', 'desc')
             ->limit($limit)
             ->get();
 
-        return $missedQuestions->groupBy('section_name');
+        return $missedQuestions;
     }
 
-    /**
-     * Get overall statistics report
-     */
-    // public function getOverallReport($testVersionId = null, $startDate = null, $endDate = null)
-    // {
-    //     $query = TestAttempt::where('status', 'completed');
-
-    //     if ($testVersionId) {
-    //         $query->where('test_version_id', $testVersionId);
-    //     }
-
-    //     if ($startDate) {
-    //         $query->whereDate('completed_at', '>=', $startDate);
-    //     }
-
-    //     if ($endDate) {
-    //         $query->whereDate('completed_at', '<=', $endDate);
-    //     }
-
-    //     $attempts = $query->with('testVersion', 'sectionAttempts')->get();
-
-    //     $totalCandidates = $attempts->pluck('candidate_id')->unique()->count();
-    //     $totalAttempts = $attempts->count();
-    //     $passedCount = $attempts->where('passed', true)->count();
-    //     $failedCount = $attempts->where('passed', false)->count();
-    //     $averageScore = $attempts->avg('percentage');
-
-    //     // Section-wise averages
-    //     $sectionAverages = [];
-    //     foreach ($attempts->first()->sectionAttempts ?? [] as $sa) {
-    //         $sectionId = $sa->test_section_id;
-    //         $sectionName = $sa->testSection->name;
-
-    //         $sectionCorrect = 0;
-    //         $sectionTotal = 0;
-
-    //         foreach ($attempts as $attempt) {
-    //             $sectionData = $attempt->sectionAttempts()
-    //                 ->where('test_section_id', $sectionId)
-    //                 ->first();
-
-    //             if ($sectionData) {
-    //                 $sectionCorrect += $sectionData->correct_answers;
-    //                 $sectionTotal += $sectionData->total_questions;
-    //             }
-    //         }
-
-    //         $sectionAverages[$sectionName] = $sectionTotal > 0 
-    //             ? round(($sectionCorrect / $sectionTotal) * 100, 2)
-    //             : 0;
-    //     }
-
-    //     return [
-    //         'total_candidates' => $totalCandidates,
-    //         'total_attempts' => $totalAttempts,
-    //         'passed_count' => $passedCount,
-    //         'failed_count' => $failedCount,
-    //         'pass_rate' => $totalAttempts > 0 ? round(($passedCount / $totalAttempts) * 100, 2) : 0,
-    //         'average_score' => round($averageScore, 2),
-    //         'section_averages' => $sectionAverages,
-    //         'highest_score' => $attempts->max('percentage'),
-    //         'lowest_score' => $attempts->min('percentage'),
-    //     ];
-    // }
 
     public function getCategoryReport($testVersionId = null)
     {

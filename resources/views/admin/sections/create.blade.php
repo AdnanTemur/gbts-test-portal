@@ -8,7 +8,7 @@
         <div class="mb-6">
             <div class="flex items-center justify-between w-full">
                 <div>
-                    <h1 class="text-2xl font-bold text-gray-900">Create Test Section</h1>
+                    <h1 class="text-2xl font-bold text-army-green-700">Create Test Section</h1>
                     <p class="text-sm text-gray-600 mt-1">Add a new section to organize your test questions</p>
                 </div>
             </div>

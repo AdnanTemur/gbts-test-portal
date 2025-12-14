@@ -6,7 +6,7 @@
     <div class="max-w-6xl mx-auto">
         <!-- Header -->
         <div class="mb-6">
-            <h1 class="text-3xl font-bold text-gray-900">Distribution Preview</h1>
+            <h1 class="text-3xl font-bold text-army-green-700">Distribution Preview</h1>
             <p class="text-gray-600 mt-1">{{ $testVersion->title }} - {{ $testVersion->version_code }}</p>
         </div>
 

@@ -174,12 +174,12 @@
                                             </label>
                                             <input type="text" id="cnic_{{ $testVersion->id }}" name="cnic"
                                                 placeholder="12345-1234567-1" pattern="[0-9]{5}-[0-9]{7}-[0-9]{1}" required
-                                                class="w-full px-5 py-4 text-lg border-2 border-gray-300 rounded-xl focus:border-army-green-600 focus:ring-4 focus:ring-army-green-100 transition-all outline-none">
+                                                class="w-full px-5 py-2 text-lg border-2 border-gray-300 rounded-xl focus:border-army-green-600 focus:ring-4 focus:ring-army-green-100 transition-all outline-none">
                                             <p class="mt-2 text-xs text-gray-500">Format: xxxxx-xxxxxxx-x</p>
                                         </div>
 
                                         <button type="submit"
-                                            class="w-full bg-gradient-to-r from-army-green-700 to-army-green-600 hover:from-army-green-800 hover:to-army-green-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center group">
+                                            class="w-full bg-gradient-to-r from-army-green-700 to-army-green-600 hover:from-army-green-800 hover:to-army-green-700 text-white font-bold py-2 px-6 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center group">
                                             <span class="text-lg">Start Test</span>
                                             <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none"
                                                 stroke="currentColor" viewBox="0 0 24 24">

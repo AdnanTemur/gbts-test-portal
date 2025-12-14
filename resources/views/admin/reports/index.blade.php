@@ -6,7 +6,7 @@
     <div class="mb-8">
         <div class="flex items-center justify-between">
             <div>
-                <h1 class="text-3xl font-bold text-gray-900">Reports & Analytics</h1>
+                <h1 class="text-3xl font-bold text-army-green-700">Reports & Analytics</h1>
                 <p class="text-gray-600 mt-1">Generate comprehensive reports and analyze test data</p>
             </div>
         </div>
@@ -237,14 +237,14 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                     </svg>
-                                    {{ $attempt->completed_at->format('M d, H:i') }}
+                                    {{ $attempt->completed_at->format('M d, h:i A') }}
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                 {{ $attempt->candidate->name }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                                {{ Str::limit($attempt->testVersion->title, 30) }}
+                                {{ Str::limit($attempt->testVersion->title, 50) }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span

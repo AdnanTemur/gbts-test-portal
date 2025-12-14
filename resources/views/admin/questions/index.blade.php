@@ -6,7 +6,7 @@
     <div class="mb-8">
         <div class="flex items-center justify-between">
             <div>
-                <h1 class="text-3xl font-bold text-gray-900">Test Questions</h1>
+                <h1 class="text-3xl font-bold text-army-green-700">Test Questions</h1>
                 <p class="text-gray-600 mt-1">Manage questions across all test sections</p>
             </div>
             <a href="{{ route('admin.questions.create') }}"

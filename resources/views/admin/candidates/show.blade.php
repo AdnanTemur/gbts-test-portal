@@ -7,7 +7,7 @@
         <!-- Header -->
         <div class="mb-6">
             <div class="flex items-center justify-between">
-                <h1 class="text-3xl font-bold text-gray-900">Candidate Details</h1>
+                <h1 class="text-3xl font-bold text-army-green-700">Candidate Details</h1>
                 <a href="{{ route('admin.candidates.index') }}"
                     class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -300,11 +300,9 @@
     @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('ApexCharts:', window.ApexCharts); // Debug
             
             // Prepare data for charts
             const completedAttempts = @json($candidate->testAttempts->where('status', 'completed')->values());
-            console.log('Completed Attempts:', completedAttempts); // Debug
             
             // 1. Score Trend Chart
             const scoreTrendOptions = {

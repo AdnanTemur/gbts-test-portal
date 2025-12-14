@@ -8,7 +8,7 @@
         <div class="mb-6">
             <div class="flex items-center justify-between">
                 <div>
-                    <h1 class="text-2xl font-bold text-gray-900">Edit Question</h1>
+                    <h1 class="text-2xl font-bold text-army-green-700">Edit Question</h1>
                     <p class="text-sm text-gray-600 mt-1">Update question details and settings</p>
                 </div>
             </div>
