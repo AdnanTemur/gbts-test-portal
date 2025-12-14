@@ -14,10 +14,10 @@ class CandidateManagementController extends Controller
 
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('cnic', 'like', "%{$search}%")
-                  ->orWhere('name', 'like', "%{$search}%")
-                  ->orWhere('phone', 'like', "%{$search}%");
+                    ->orWhere('name', 'like', "%{$search}%")
+                    ->orWhere('phone', 'like', "%{$search}%");
             });
         }
 
@@ -28,7 +28,11 @@ class CandidateManagementController extends Controller
 
     public function show(Candidate $candidate)
     {
-        $candidate->load(['testAttempts.testVersion', 'testAttempts.sectionAttempts.testSection']);
+        $candidate->load([
+            'testAttempts.testVersion',
+            'testAttempts.sectionAttempts.testSection',
+            'testAttempts.answers.question'
+        ]);
         return view('admin.candidates.show', compact('candidate'));
     }
 }

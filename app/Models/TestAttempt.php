@@ -72,6 +72,11 @@ class TestAttempt extends Model
         return $this->hasMany(CandidateAnswer::class);
     }
 
+    public function answers(): HasMany
+    {
+        return $this->candidateAnswers();
+    }
+
     /**
      * Calculate and update the score
      */
