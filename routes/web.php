@@ -15,7 +15,13 @@ use App\Http\Controllers\Auth\LoginController;
 // Public routes
 Route::get('/', [CandidateController::class, 'index'])->name('home');
 Route::post('/candidate/lookup', [CandidateController::class, 'lookup'])->name('candidate.lookup');
+Route::get('/candidate/lookup', function () {
+    return redirect()->route('home')->with('error', 'Validation failed during registration. Please try again.');
+})->name('candidate.lookup.redirect');
 Route::post('/candidate/register', [CandidateController::class, 'register'])->name('candidate.register');
+Route::get('/candidate/register', function() {
+    return redirect()->route('home')->with('info', 'Please start from the home page.');
+});
 
 // Test taking routes
 Route::get('/test/start/{token}', [TestController::class, 'start'])->name('test.start');
@@ -38,21 +44,21 @@ Route::post('/admin/logout', [LoginController::class, 'logout'])->name('logout')
 // Admin routes
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
-    
+
     // Test Sections
     Route::resource('sections', TestSectionController::class);
-    
+
     // Questions
     Route::resource('questions', QuestionController::class);
-    
+
     // Test Versions
     Route::resource('test-versions', TestVersionController::class);
     Route::get('test-versions/{testVersion}/preview', [TestVersionController::class, 'preview'])->name('test-versions.preview');
-    
+
     // Candidates
     Route::get('candidates', [CandidateManagementController::class, 'index'])->name('candidates.index');
     Route::get('candidates/{candidate}', [CandidateManagementController::class, 'show'])->name('candidates.show');
-    
+
     // Reports
     Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
     Route::get('reports/candidate-wise', [ReportController::class, 'candidateWise'])->name('reports.candidate-wise');

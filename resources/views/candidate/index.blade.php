@@ -86,7 +86,7 @@
                             <div class="p-8">
                                 <!-- Stats Grid -->
                                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-5 rounded-xl border border-blue-200">
+                                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 px-5 py-3 rounded-xl border border-blue-200">
                                         <div class="flex items-center mb-2">
                                             <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center mr-3">
                                                 <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor"
@@ -103,7 +103,7 @@
                                     </div>
 
                                     <div
-                                        class="bg-gradient-to-br from-purple-50 to-purple-100 p-5 rounded-xl border border-purple-200">
+                                        class="bg-gradient-to-br from-purple-50 to-purple-100 px-5 py-3 rounded-xl border border-purple-200">
                                         <div class="flex items-center mb-2">
                                             <div class="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center mr-3">
                                                 <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor"
@@ -120,7 +120,7 @@
                                     </div>
 
                                     <div
-                                        class="bg-gradient-to-br from-amber-50 to-amber-100 p-5 rounded-xl border border-amber-200">
+                                        class="bg-gradient-to-br from-amber-50 to-amber-100 px-5 py-3 rounded-xl border border-amber-200">
                                         <div class="flex items-center mb-2">
                                             <div class="w-8 h-8 bg-amber-600 rounded-lg flex items-center justify-center mr-3">
                                                 <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor"
@@ -137,7 +137,7 @@
                                     </div>
 
                                     <div
-                                        class="bg-gradient-to-br from-green-50 to-green-100 p-5 rounded-xl border border-green-200">
+                                        class="bg-gradient-to-br from-green-50 to-green-100 px-5 py-3 rounded-xl border border-green-200">
                                         <div class="flex items-center mb-2">
                                             <div class="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center mr-3">
                                                 <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor"

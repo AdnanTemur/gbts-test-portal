@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('father_name');
             $table->string('phone');
             $table->string('email')->nullable();
-            $table->string('photo')->nullable(); // Path to candidate photo
+            $table->string('photo')->nullable();
             $table->timestamps();
             
             $table->index(['cnic', 'phone']);

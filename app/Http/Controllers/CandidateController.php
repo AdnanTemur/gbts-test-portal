@@ -24,7 +24,7 @@ class CandidateController extends Controller
     public function index()
     {
         $testVersions = TestVersion::where('status', 'active')->get();
-        
+
         return view('candidate.index', compact('testVersions'));
     }
 
@@ -73,7 +73,11 @@ class CandidateController extends Controller
             'cnic' => 'required|string|max:20',
             'name' => 'required|string|max:255',
             'father_name' => 'required|string|max:255',
-            'phone' => 'required|string|max:20',
+            'phone' => [
+                'required',
+                'string',
+                'regex:/^((\+92)|(0092)|(92)|(0))[3-9][0-9]{9}$/'
+            ],
             'email' => 'nullable|email|max:255',
             'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'test_version_id' => 'required|exists:test_versions,id',
@@ -83,13 +87,6 @@ class CandidateController extends Controller
         $photoPath = null;
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo');
-            
-            // Validate aspect ratio (1:1 square)
-            list($width, $height) = getimagesize($photo->path());
-            if ($width != $height) {
-                return back()->withErrors(['photo' => 'Photo must be square (1:1 aspect ratio)']);
-            }
-            
             $photoPath = $photo->store('candidates', 'public');
         }
 
@@ -107,7 +104,7 @@ class CandidateController extends Controller
 
         // Create new test attempt
         $testVersion = TestVersion::findOrFail($validated['test_version_id']);
-        
+
         $testAttempt = TestAttempt::create([
             'candidate_id' => $candidate->id,
             'test_version_id' => $testVersion->id,
