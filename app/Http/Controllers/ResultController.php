@@ -70,4 +70,18 @@ class ResultController extends Controller
 
         return $this->pdfService->generateCertificate($testAttempt);
     }
+
+    /**
+     * Download Answer Sheet
+     */
+    public function answerSheetPdf($token)
+    {
+        $testAttempt = TestAttempt::where('attempt_token', $token)->firstOrFail();
+
+        if ($testAttempt->status !== 'completed' && $testAttempt->status !== 'timeout') {
+            abort(403, 'Test not completed');
+        }
+
+        return $this->pdfService->generateAnswerSheet($testAttempt);
+    }
 }

@@ -226,15 +226,19 @@
     <!-- Actions -->
     <div class="flex items-center justify-center space-x-4 mb-8">
         <a href="{{ route('results.pdf', $testAttempt->attempt_token) }}"
-           class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg transition-colors">
+           class="bg-rose-600 hover:bg-rose-700 text-white font-bold py-2 px-4 rounded-lg transition-colors">
             📄 Download PDF Certificate
         </a>
+        <a href="{{ route('results.pdf.answersheet', $testAttempt->attempt_token) }}"
+           class="bg-teal-700 hover:bg-teal-900 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+            📄 Download Answer Sheet
+        </a>
         <button onclick="window.print()" 
-                class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-8 rounded-lg transition-colors">
+                class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg transition-colors">
             🖨️ Print Results
         </button>
         <a href="{{ route('home') }}"
-           class="bg-army-green-700 hover:bg-army-green-800 text-white font-bold py-3 px-8 rounded-lg transition-colors">
+           class="bg-army-green-700 hover:bg-army-green-800 text-white font-bold py-2 px-4 rounded-lg transition-colors">
             ← Back to Home
         </a>
     </div>

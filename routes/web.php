@@ -35,6 +35,7 @@ Route::post('/test/submit/{token}', [TestController::class, 'submit'])->name('te
 // Result routes
 Route::get('/results/{token}', [ResultController::class, 'show'])->name('results.show');
 Route::get('/results/{token}/pdf', [ResultController::class, 'pdf'])->name('results.pdf');
+Route::get('/results/{token}/pdf/answersheet', [ResultController::class, 'answerSheetPdf'])->name('results.pdf.answersheet');
 
 // Auth routes
 Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('login');
