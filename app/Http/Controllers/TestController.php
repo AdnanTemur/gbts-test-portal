@@ -101,7 +101,7 @@ class TestController extends Controller
             ->get()
             ->map(function ($assignment) use ($testAttempt) {
                 $question = $assignment->question;
-                
+
                 // Shuffle options if configured
                 if ($testAttempt->testVersion->shuffle_options) {
                     if ($question->isMCQ() || $question->isTrueFalse()) {
@@ -114,7 +114,7 @@ class TestController extends Controller
                         $question->shuffled_column_b = $columnBItems;
                     }
                 }
-                
+
                 return $assignment;
             });
 
@@ -201,7 +201,10 @@ class TestController extends Controller
     public function submit($token)
     {
         $testAttempt = TestAttempt::where('attempt_token', $token)->firstOrFail();
-        
+
+        // Store token in session for result access
+        session(['completed_test_token' => $testAttempt->attempt_token]);
+
         return $this->completeTest($testAttempt);
     }
 

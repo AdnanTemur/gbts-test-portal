@@ -19,7 +19,7 @@ Route::get('/candidate/lookup', function () {
     return redirect()->route('home')->with('error', 'Validation failed during registration. Please try again.');
 })->name('candidate.lookup.redirect');
 Route::post('/candidate/register', [CandidateController::class, 'register'])->name('candidate.register');
-Route::get('/candidate/register', function() {
+Route::get('/candidate/register', function () {
     return redirect()->route('home')->with('info', 'Please start from the home page.');
 });
 
@@ -33,9 +33,11 @@ Route::post('/test/next-section/{token}', [TestController::class, 'nextSection']
 Route::post('/test/submit/{token}', [TestController::class, 'submit'])->name('test.submit');
 
 // Result routes
-Route::get('/results/{token}', [ResultController::class, 'show'])->name('results.show');
-Route::get('/results/{token}/pdf', [ResultController::class, 'pdf'])->name('results.pdf');
-Route::get('/results/{token}/pdf/answersheet', [ResultController::class, 'answerSheetPdf'])->name('results.pdf.answersheet');
+Route::middleware('test.result.access')->group(function () {
+    Route::get('/results/{token}', [ResultController::class, 'show'])->name('results.show');
+    Route::get('/results/{token}/pdf', [ResultController::class, 'pdf'])->name('results.pdf');
+    Route::get('/results/{token}/pdf/answersheet', [ResultController::class, 'answerSheetPdf'])->name('results.pdf.answersheet');
+});
 
 // Auth routes
 Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('login');
