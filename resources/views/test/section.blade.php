@@ -239,7 +239,7 @@
                         </svg>
                     </button>
 
-                    <form x-show="currentQuestion === {{ $questions->count() - 1 }}" method="POST"
+                    <form id="section-form" x-show="currentQuestion === {{ $questions->count() - 1 }}" method="POST"
                         action="{{ route('test.nextSection', $testAttempt->attempt_token) }}"
                         onsubmit="return confirm('Are you sure you want to move to the next section? You cannot come back to this section.')">
                         @csrf
