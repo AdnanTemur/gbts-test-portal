@@ -10,11 +10,16 @@ class TestSectionSeeder extends Seeder
 {
     public function run(): void
     {
+        TestSection::query()->delete();
+
         $sections = [
-            ['name' => 'Verbal Reasoning', 'display_order' => 1],
-            ['name' => 'Non-Verbal Reasoning', 'display_order' => 2],
-            ['name' => 'Numerical Ability', 'display_order' => 3],
-            ['name' => 'General Knowledge', 'display_order' => 4],
+            ['name' => 'English', 'display_order' => 1],
+            ['name' => 'General Knowledge', 'display_order' => 2],
+            ['name' => 'Pakistan Studies', 'display_order' => 3],
+            ['name' => 'Islamic Studies', 'display_order' => 4],
+            ['name' => 'Mathematics', 'display_order' => 5],
+            ['name' => 'Computer Skills', 'display_order' => 6],
+            ['name' => 'Analytical Reasoning', 'display_order' => 7],
         ];
 
         foreach ($sections as $section) {

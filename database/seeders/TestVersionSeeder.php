@@ -11,42 +11,85 @@ class TestVersionSeeder extends Seeder
 {
     public function run(): void
     {
-        $sections = TestSection::orderBy('display_order')->get();
+        // Clean existing data
+        DB::table('version_sections')->delete();
+        TestVersion::query()->delete();
 
-        // Create 3 test versions
+        $allSections = TestSection::orderBy('display_order')->get();
+        $sectionsByName = $allSections->keyBy('name');
+
         $versions = [
+            // ─────────────────────────────────────────────────────────────
+            // BS-16 Assistant (Upper Division Clerk level)
+            // FPSC pattern: English, GK, Pakistan Studies, Islamic Studies,
+            //               Mathematics, Computer Skills
+            // ─────────────────────────────────────────────────────────────
             [
-                'title' => 'Mock Initial PMA Long Test - December 2024',
-                'description' => 'Comprehensive test covering all sections',
-                'version_code' => 'PMA-DEC24-L',
-                'section_time_limit' => 15,
-                'questions_per_section' => 15,
-                'expected_candidates' => 50,
-                'overlap_threshold' => 20,
-                'pass_threshold' => 60,
-                'status' => 'active',
-            ],
-            [
-                'title' => 'Mock Initial PMA Short Test - December 2024',
-                'description' => 'Quick assessment test',
-                'version_code' => 'PMA-DEC24-S',
-                'section_time_limit' => 10,
+                'title' => 'FPSC Assistant BS-16 Mock Test',
+                'description' => 'Mock test for FPSC Assistant (BS-16) post. Covers English, General Knowledge, Pakistan Studies, Islamic Studies, Mathematics and Computer Skills as per FPSC syllabus.',
+                'version_code' => 'FPSC-ASST-BS16',
+                'section_time_limit' => 12,
                 'questions_per_section' => 10,
-                'expected_candidates' => 30,
-                'overlap_threshold' => 25,
+                'expected_candidates' => 100,
+                'overlap_threshold' => 20,
                 'pass_threshold' => 50,
                 'status' => 'active',
+                'sections' => [
+                    'English',
+                    'General Knowledge',
+                    'Pakistan Studies',
+                    'Islamic Studies',
+                    'Mathematics',
+                    'Computer Skills',
+                ],
             ],
+
+            // ─────────────────────────────────────────────────────────────
+            // BS-17 Clerk / Junior Clerk
+            // FPSC pattern: English, GK, Pakistan Studies, Islamic Studies,
+            //               Analytical Reasoning
+            // ─────────────────────────────────────────────────────────────
             [
-                'title' => 'Practice Test - November 2024',
-                'description' => 'Practice test for preparation',
-                'version_code' => 'PMA-NOV24-P',
-                'section_time_limit' => 20,
-                'questions_per_section' => 20,
-                'expected_candidates' => 100,
-                'overlap_threshold' => 15,
-                'pass_threshold' => 70,
-                'status' => 'completed',
+                'title' => 'FPSC Junior Clerk BS-11 Mock Test',
+                'description' => 'Mock test for FPSC Junior Clerk (BS-11) post. Covers English, General Knowledge, Pakistan Studies, Islamic Studies and Analytical Reasoning as per FPSC syllabus.',
+                'version_code' => 'FPSC-JCLK-BS11',
+                'section_time_limit' => 10,
+                'questions_per_section' => 8,
+                'expected_candidates' => 150,
+                'overlap_threshold' => 25,
+                'pass_threshold' => 45,
+                'status' => 'active',
+                'sections' => [
+                    'English',
+                    'General Knowledge',
+                    'Pakistan Studies',
+                    'Islamic Studies',
+                    'Analytical Reasoning',
+                ],
+            ],
+
+            // ─────────────────────────────────────────────────────────────
+            // BS-17 Data Entry Operator / Computer Operator
+            // FPSC pattern: English, GK, Mathematics, Computer Skills,
+            //               Analytical Reasoning
+            // ─────────────────────────────────────────────────────────────
+            [
+                'title' => 'FPSC Computer Operator BS-14 Mock Test',
+                'description' => 'Mock test for FPSC Computer Operator / Data Entry Operator (BS-14) post. Focuses heavily on Computer Skills, Mathematics and Analytical Reasoning alongside English and General Knowledge.',
+                'version_code' => 'FPSC-COMP-BS14',
+                'section_time_limit' => 15,
+                'questions_per_section' => 12,
+                'expected_candidates' => 80,
+                'overlap_threshold' => 20,
+                'pass_threshold' => 55,
+                'status' => 'active',
+                'sections' => [
+                    'English',
+                    'General Knowledge',
+                    'Mathematics',
+                    'Computer Skills',
+                    'Analytical Reasoning',
+                ],
             ],
         ];
 
@@ -65,15 +108,17 @@ class TestVersionSeeder extends Seeder
                 'status' => $versionData['status'],
             ]);
 
-            // Attach all sections in order
-            foreach ($sections as $index => $section) {
-                DB::table('version_sections')->insert([
-                    'test_version_id' => $version->id,
-                    'test_section_id' => $section->id,
-                    'section_order' => $index,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
+            // Attach only the relevant sections for this post
+            foreach ($versionData['sections'] as $order => $sectionName) {
+                if (isset($sectionsByName[$sectionName])) {
+                    DB::table('version_sections')->insert([
+                        'test_version_id' => $version->id,
+                        'test_section_id' => $sectionsByName[$sectionName]->id,
+                        'section_order' => $order,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
             }
         }
     }
