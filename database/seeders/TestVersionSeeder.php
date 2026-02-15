@@ -11,7 +11,6 @@ class TestVersionSeeder extends Seeder
 {
     public function run(): void
     {
-        // Clean existing data
         DB::table('version_sections')->delete();
         TestVersion::query()->delete();
 
@@ -19,42 +18,29 @@ class TestVersionSeeder extends Seeder
         $sectionsByName = $allSections->keyBy('name');
 
         $versions = [
-            // ─────────────────────────────────────────────────────────────
-            // BS-16 Assistant (Upper Division Clerk level)
-            // FPSC pattern: English, GK, Pakistan Studies, Islamic Studies,
-            //               Mathematics, Computer Skills
-            // ─────────────────────────────────────────────────────────────
             [
-                'title' => 'FPSC Assistant BS-16 Mock Test',
-                'description' => 'Mock test for FPSC Assistant (BS-16) post. Covers English, General Knowledge, Pakistan Studies, Islamic Studies, Mathematics and Computer Skills as per FPSC syllabus.',
-                'version_code' => 'FPSC-ASST-BS16',
-                'section_time_limit' => 12,
-                'questions_per_section' => 10,
-                'expected_candidates' => 100,
-                'overlap_threshold' => 20,
-                'pass_threshold' => 50,
+                'title' => 'GBTS CBT - Lower Division Clerk (BS-7)',
+                'description' => 'Computer Based Test for Lower Division Clerk (BS-7) conducted by Gilgit-Baltistan Testing Service.',
+                'version_code' => 'GBTS-LDC-BS07',
+                'section_time_limit' => 8,
+                'questions_per_section' => 8,
+                'expected_candidates' => 200,
+                'overlap_threshold' => 30,
+                'pass_threshold' => 40,
                 'status' => 'active',
                 'sections' => [
                     'English',
                     'General Knowledge',
                     'Pakistan Studies',
                     'Islamic Studies',
-                    'Mathematics',
-                    'Computer Skills',
                 ],
             ],
-
-            // ─────────────────────────────────────────────────────────────
-            // BS-17 Clerk / Junior Clerk
-            // FPSC pattern: English, GK, Pakistan Studies, Islamic Studies,
-            //               Analytical Reasoning
-            // ─────────────────────────────────────────────────────────────
             [
-                'title' => 'FPSC Junior Clerk BS-11 Mock Test',
-                'description' => 'Mock test for FPSC Junior Clerk (BS-11) post. Covers English, General Knowledge, Pakistan Studies, Islamic Studies and Analytical Reasoning as per FPSC syllabus.',
-                'version_code' => 'FPSC-JCLK-BS11',
+                'title' => 'GBTS CBT - Junior Clerk (BS-11)',
+                'description' => 'Computer Based Test for Junior Clerk (BS-11) conducted by Gilgit-Baltistan Testing Service.',
+                'version_code' => 'GBTS-JCLK-BS11',
                 'section_time_limit' => 10,
-                'questions_per_section' => 8,
+                'questions_per_section' => 10,
                 'expected_candidates' => 150,
                 'overlap_threshold' => 25,
                 'pass_threshold' => 45,
@@ -67,21 +53,15 @@ class TestVersionSeeder extends Seeder
                     'Analytical Reasoning',
                 ],
             ],
-
-            // ─────────────────────────────────────────────────────────────
-            // BS-17 Data Entry Operator / Computer Operator
-            // FPSC pattern: English, GK, Mathematics, Computer Skills,
-            //               Analytical Reasoning
-            // ─────────────────────────────────────────────────────────────
             [
-                'title' => 'FPSC Computer Operator BS-14 Mock Test',
-                'description' => 'Mock test for FPSC Computer Operator / Data Entry Operator (BS-14) post. Focuses heavily on Computer Skills, Mathematics and Analytical Reasoning alongside English and General Knowledge.',
-                'version_code' => 'FPSC-COMP-BS14',
-                'section_time_limit' => 15,
-                'questions_per_section' => 12,
-                'expected_candidates' => 80,
+                'title' => 'GBTS CBT - Computer Operator (BS-14)',
+                'description' => 'Computer Based Test for Computer Operator / Data Entry Operator (BS-14) conducted by Gilgit-Baltistan Testing Service.',
+                'version_code' => 'GBTS-COMP-BS14',
+                'section_time_limit' => 12,
+                'questions_per_section' => 10,
+                'expected_candidates' => 100,
                 'overlap_threshold' => 20,
-                'pass_threshold' => 55,
+                'pass_threshold' => 50,
                 'status' => 'active',
                 'sections' => [
                     'English',
@@ -108,7 +88,6 @@ class TestVersionSeeder extends Seeder
                 'status' => $versionData['status'],
             ]);
 
-            // Attach only the relevant sections for this post
             foreach ($versionData['sections'] as $order => $sectionName) {
                 if (isset($sectionsByName[$sectionName])) {
                     DB::table('version_sections')->insert([
