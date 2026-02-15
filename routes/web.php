@@ -33,11 +33,11 @@ Route::post('/test/next-section/{token}', [TestController::class, 'nextSection']
 Route::post('/test/submit/{token}', [TestController::class, 'submit'])->name('test.submit');
 
 // Result routes
-Route::middleware('test.result.access')->group(function () {
+// Route::middleware('test.result.access')->group(function () {
     Route::get('/results/{token}', [ResultController::class, 'show'])->name('results.show');
     Route::get('/results/{token}/pdf', [ResultController::class, 'pdf'])->name('results.pdf');
     Route::get('/results/{token}/pdf/answersheet', [ResultController::class, 'answerSheetPdf'])->name('results.pdf.answersheet');
-});
+// });
 
 // Auth routes
 Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('login');
