@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Confirm Details - PMA Test Portal')
+@section('title', 'Confirm Details - ' . config('app.name', 'GBTS Test Portal'))
 
 @section('content')
     <div class="min-h-screen flex items-center justify-center px-4 py-12 bg-gradient-to-br from-gray-50 to-gray-100">

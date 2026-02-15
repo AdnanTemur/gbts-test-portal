@@ -1,33 +1,92 @@
 @extends('layouts.app')
 
-@section('title', 'PMA Test Portal - Home')
+@section('title', config('app.name', 'GBTS Test Portal') . ' - Home')
 
 @section('content')
-    <div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Hero Section -->
-            <div class="text-center mb-12">
-                <div class="inline-flex items-center justify-center w-20 h-20 bg-army-green-700 rounded-2xl mb-6 shadow-lg">
-                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+        <!-- Hero Section -->
+        <div class="relative h-screen w-full mb-12">
+            <!-- Background Image -->
+            <div class="absolute inset-0">
+                <img src="https://images.pexels.com/photos/31359466/pexels-photo-31359466.jpeg"
+                    alt="Mountains" class="w-full h-full object-cover">
+                <!-- Dark Overlay -->
+                <div class="absolute inset-0 bg-black/50"></div>
+                <!-- Green Gradient Overlay -->
+                <div class="absolute inset-0 bg-gradient-to-t from-army-green-900/80 via-transparent to-transparent"></div>
+            </div>
+
+            <!-- Hero Content -->
+            <div class="relative z-10 h-full flex flex-col justify-center items-center px-4 text-center pt-16 pb-48">
+                <!-- Badge -->
+                <div
+                    class="inline-flex items-center px-4 py-2 bg-army-green-600/90 backdrop-blur-sm rounded-full mb-6 shadow-lg">
+                    <svg class="w-4 h-4 text-white mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
+                    <span class="text-xs font-semibold text-white tracking-wide">GBTS,
+                        Gilgit-Baltistan</span>
                 </div>
-                <h1 class="text-5xl font-bold text-gray-900 mb-4">
-                    Mock Initial PMA Test
+
+                <!-- Main Title -->
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight drop-shadow-lg">
+                    GBTS Mock Test
                 </h1>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                    Assessment & Recruitment Centre, Gilgit
+
+                <!-- Subtitle -->
+                <p class="text-base md:text-lg text-white/90 mb-8 max-w-2xl leading-relaxed">
+                    Prepare for success with our comprehensive assessment portal designed for aspiring candidates.
                 </p>
-                <div class="mt-4 inline-flex items-center px-4 py-2 bg-army-green-50 rounded-full">
-                    <svg class="w-5 h-5 text-army-green-700 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+                <!-- CTA Button -->
+                <a href="#tests"
+                    class="inline-flex items-center px-6 py-3 bg-army-green-600 hover:bg-army-green-700 text-white font-semibold text-base rounded-full transition-all duration-300 shadow-xl hover:shadow-army-green-500/30 transform hover:scale-105 group">
+                    <span>Get Started</span>
+                    <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
-                    <span class="text-sm font-medium text-army-green-900">Enter your CNIC to begin the test</span>
+                </a>
+            </div>
+
+            <!-- Stats Row - Fixed at bottom -->
+            <div class="absolute bottom-20 left-0 right-0 z-20 px-4">
+                <div class="max-w-3xl mx-auto">
+                    <div class="grid grid-cols-3 gap-4 bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+                        <div class="text-center">
+                            <div class="text-2xl md:text-3xl font-bold text-white">{{ $testVersions->count() }}</div>
+                            <div class="text-xs text-white/70 mt-1 font-medium">Active Tests</div>
+                        </div>
+                        <div class="text-center border-x border-white/20">
+                            <div class="text-2xl md:text-3xl font-bold text-white">
+                                {{ $testVersions->sum(fn($t) => $t->testSections->count()) }}
+                            </div>
+                            <div class="text-xs text-white/70 mt-1 font-medium">Total Sections</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl md:text-3xl font-bold text-white">24/7</div>
+                            <div class="text-xs text-white/70 mt-1 font-medium">Available</div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20">
+                <a href="#tests" class="text-white/60 hover:text-white transition-colors">
+                    <svg class="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             @if($testVersions->isEmpty())
                 <!-- Empty State -->
                 <div class="bg-white rounded-2xl shadow-lg p-12 text-center border border-gray-200">
@@ -62,7 +121,8 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
                                             </svg>
-                                            <span class="text-sm font-medium text-army-green-900 text-center">{{ $testVersion->version_code }}</span>
+                                            <span
+                                                class="text-sm font-medium text-army-green-900 text-center">{{ $testVersion->version_code }}</span>
                                         </div>
                                     </div>
                                     <div class="text-right">
@@ -86,7 +146,8 @@
                             <div class="p-8">
                                 <!-- Stats Grid -->
                                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 px-5 py-3 rounded-xl border border-blue-200">
+                                    <div
+                                        class="bg-gradient-to-br from-blue-50 to-blue-100 px-5 py-3 rounded-xl border border-blue-200">
                                         <div class="flex items-center mb-2">
                                             <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center mr-3">
                                                 <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor"

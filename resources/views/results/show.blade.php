@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Test Results - PMA Test Portal')
+@section('title', 'Test Results - ' . config('app.name', 'GBTS Test Portal'))
 
 @section('content')
 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">

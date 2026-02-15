@@ -22,9 +22,8 @@
                         </svg>
                     </div>
                     <div class="ml-3 hidden lg:block">
-                        <span class="self-center text-xl font-bold text-gray-900 whitespace-nowrap">PMA Test
-                            Portal</span>
-                        <p class="text-xs text-gray-500">AS & RC, Gilgit</p>
+                        <span class="self-center text-xl font-bold text-gray-900 whitespace-nowrap">{{ config('app.name', 'GBTS Test Portal') }}</span>
+                        <p class="text-xs text-gray-500">Gilgit, Gilgit-Baltistan</p>
                     </div>
                 </a>
             </div>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Admin Login - PMA Test Portal</title>
+    <title>Admin Login - {{ config('app.name', 'GBTS Test Portal') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         @keyframes blob {
@@ -103,8 +103,8 @@
                             d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                     </svg>
                 </div>
-                <h1 class="text-3xl font-bold text-white mb-1 drop-shadow-lg">PMA Admin Panel</h1>
-                <p class="text-army-green-100">AS & RC, Gilgit</p>
+                <h1 class="text-3xl font-bold text-white mb-1 drop-shadow-lg">{{ config('app.name', 'GBTS Test Portal') }} Admin Panel</h1>
+                <p class="text-army-green-100">GBTS, Gilgit, Gilgit-Baltistan</p>
             </div>
 
             <!-- Login Card - Reduced padding -->
@@ -221,7 +221,7 @@
             <!-- Footer Info -->
             <div class="mt-6 text-center">
                 <p class="text-army-green-100 text-sm">
-                    &copy; {{ date('Y') }} Pakistan Military Academy. All rights reserved.
+                    &copy; {{ date('Y') }} GBTS. All rights reserved.
                 </p>
             </div>
         </div>
