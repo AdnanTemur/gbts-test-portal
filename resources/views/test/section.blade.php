@@ -38,10 +38,10 @@
                         <div class="mt-4 flex flex-wrap gap-2">
                             @foreach($questions as $index => $assignment)
                                 <button type="button" @click="currentQuestion = {{ $index }}" :class="{
-                                                                'bg-primary-600 text-white': currentQuestion === {{ $index }},
-                                                                'bg-green-100 text-green-700 border-green-300': currentQuestion !== {{ $index }} && isAnswered({{ $index }}),
-                                                                'bg-white text-gray-700 border-gray-300': currentQuestion !== {{ $index }} && !isAnswered({{ $index }})
-                                                            }"
+                                                                        'bg-primary-600 text-white': currentQuestion === {{ $index }},
+                                                                        'bg-green-100 text-green-700 border-green-300': currentQuestion !== {{ $index }} && isAnswered({{ $index }}),
+                                                                        'bg-white text-gray-700 border-gray-300': currentQuestion !== {{ $index }} && !isAnswered({{ $index }})
+                                                                    }"
                                     class="w-10 h-10 rounded-lg border-2 font-semibold text-sm transition-all hover:scale-110">
                                     {{ $index + 1 }}
                                 </button>
@@ -97,7 +97,7 @@
                                 </span>
                                 <span
                                     class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold
-                                                        {{ $question->difficulty_level === 'easy' ? 'bg-green-100 text-green-800' :
+                                                                {{ $question->difficulty_level === 'easy' ? 'bg-green-100 text-green-800' :
                 ($question->difficulty_level === 'medium' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800') }}">
                                     {{ ucfirst($question->difficulty_level) }}
                                 </span>
@@ -128,7 +128,7 @@
                                 @foreach($question->options as $optIndex => $option)
                                     <label
                                         class="flex items-start px-4 py-2 border-2 rounded-xl cursor-pointer transition-all hover:shadow-md
-                                                                                    {{ $existingAnswer && $existingAnswer->selected_option_id == $option->id ? 'border-primary-600 bg-primary-50' : 'border-gray-300 hover:border-primary-300' }}"
+                                                                                                    {{ $existingAnswer && $existingAnswer->selected_option_id == $option->id ? 'border-primary-600 bg-primary-50' : 'border-gray-300 hover:border-primary-300' }}"
                                         @click="markAnswered({{ $index }})">
                                         <input type="radio" name="question_{{ $question->id }}" value="{{ $option->id }}" {{ $existingAnswer && $existingAnswer->selected_option_id == $option->id ? 'checked' : '' }}
                                             onchange="saveAnswer('{{ $testAttempt->attempt_token }}', {{ $question->id }}, { selected_option_id: {{ $option->id }} })"
@@ -240,8 +240,7 @@
                     </button>
 
                     <form id="section-form" x-show="currentQuestion === {{ $questions->count() - 1 }}" method="POST"
-                        action="{{ route('test.nextSection', $testAttempt->attempt_token) }}"
-                        onsubmit="return confirm('Are you sure you want to move to the next section? You cannot come back to this section.')">
+                        action="{{ route('test.nextSection', $testAttempt->attempt_token) }}">
                         @csrf
                         <button type="submit"
                             class="inline-flex items-center px-8 py-2 bg-gradient-to-r from-primary-700 to-primary-600 hover:from-primary-700 hover:to-primary-800 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition-all">
@@ -304,12 +303,6 @@
                 }
             }
 
-            // Prevent accidental page refresh
-            window.addEventListener('beforeunload', function (e) {
-                e.preventDefault();
-                e.returnValue = '';
-            });
-
             // Keyboard navigation
             document.addEventListener('keydown', function (e) {
                 if (e.key === 'ArrowLeft') {
@@ -318,6 +311,21 @@
                     Alpine.store('testSection')?.nextQuestion?.();
                 }
             });
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const sectionForm = document.getElementById('section-form');
+                const manualSubmitButton = sectionForm?.querySelector('button[type="submit"]');
+
+                if (sectionForm && manualSubmitButton) {
+                    // Intercept manual submission
+                    manualSubmitButton.addEventListener('click', function (e) {
+                        if (!confirm('Are you sure you want to move to the next section? You cannot come back to this section.')) {
+                            e.preventDefault();
+                        }
+                    });
+                }
+            });
+
         </script>
     @endpush
 @endsection
