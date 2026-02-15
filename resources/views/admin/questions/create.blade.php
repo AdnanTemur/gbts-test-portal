@@ -8,7 +8,7 @@
         <div class="mb-6">
             <div class="flex items-center justify-between">
                 <div>
-                    <h1 class="text-2xl font-bold text-army-green-700">Create New Question</h1>
+                    <h1 class="text-2xl font-bold text-primary-700">Create New Question</h1>
                     <p class="text-sm text-gray-600 mt-1">Add a new question to the question bank</p>
                 </div>
             </div>
@@ -17,7 +17,7 @@
         <!-- Form Card -->
         <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
             <!-- Card Header -->
-            <div class="px-5 py-3 bg-gradient-to-r from-army-green-700 to-army-green-600 border-b border-army-green-800">
+            <div class="px-5 py-3 bg-gradient-to-r from-primary-700 to-primary-600 border-b border-primary-800">
                 <h2 class="text-base font-semibold text-white">Question Details</h2>
             </div>
 
@@ -33,7 +33,7 @@
                             Section <span class="text-red-500">*</span>
                         </label>
                         <select id="test_section_id" name="test_section_id" required
-                            class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-army-green-100 focus:border-army-green-600 outline-none">
+                            class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 outline-none">
                             <option value="">Select Section</option>
                             @foreach($sections as $section)
                                 <option value="{{ $section->id }}" {{ old('test_section_id') == $section->id ? 'selected' : '' }}>
@@ -51,7 +51,7 @@
                             Question Type <span class="text-red-500">*</span>
                         </label>
                         <select id="question_type" name="question_type" required onchange="toggleQuestionType()"
-                            class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-army-green-100 focus:border-army-green-600 outline-none">
+                            class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 outline-none">
                             <option value="">Select Type</option>
                             <option value="mcq" {{ old('question_type') == 'mcq' ? 'selected' : '' }}>MCQ (4 options)</option>
                             <option value="true_false" {{ old('question_type') == 'true_false' ? 'selected' : '' }}>True/False
@@ -72,7 +72,7 @@
                             Difficulty <span class="text-red-500">*</span>
                         </label>
                         <select id="difficulty_level" name="difficulty_level" required
-                            class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-army-green-100 focus:border-army-green-600 outline-none">
+                            class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 outline-none">
                             <option value="easy" {{ old('difficulty_level') == 'easy' ? 'selected' : '' }}>Easy</option>
                             <option value="medium" {{ old('difficulty_level', 'medium') == 'medium' ? 'selected' : '' }}>
                                 Medium</option>
@@ -85,14 +85,14 @@
                             Marks <span class="text-red-500">*</span>
                         </label>
                         <input type="number" id="marks" name="marks" value="{{ old('marks', 1) }}" required min="1"
-                            class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-army-green-100 focus:border-army-green-600 outline-none">
+                            class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 outline-none">
                     </div>
 
                     <div class="flex items-end">
                         <div class="bg-gray-50 rounded-lg p-2.5 border border-gray-200 w-full">
                             <label class="flex items-center cursor-pointer">
                                 <input type="checkbox" name="is_active" value="1" {{ old('is_active', true) ? 'checked' : '' }}
-                                    class="w-4 h-4 text-army-green-700 border-gray-300 rounded focus:ring-army-green-600">
+                                    class="w-4 h-4 text-primary-700 border-gray-300 rounded focus:ring-primary-600">
                                 <span class="ml-2 text-sm font-medium text-gray-900">Active</span>
                             </label>
                         </div>
@@ -106,7 +106,7 @@
                     </label>
                     <textarea id="question_text" name="question_text" rows="3" required
                         placeholder="Enter the question text here..."
-                        class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-army-green-100 focus:border-army-green-600 outline-none">{{ old('question_text') }}</textarea>
+                        class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 outline-none">{{ old('question_text') }}</textarea>
                     @error('question_text')
                         <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
                     @enderror
@@ -118,7 +118,7 @@
                         Question Image <span class="text-gray-500 text-xs">(Optional, for Non-Verbal)</span>
                     </label>
                     <input type="file" id="question_image" name="question_image" accept="image/jpeg,image/jpg,image/png"
-                        class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-army-green-100 focus:border-army-green-600 outline-none">
+                        class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 outline-none">
                     <p class="text-xs text-gray-500 mt-1">Max 2MB, JPG/PNG only</p>
                 </div>
 
@@ -160,7 +160,7 @@
                         Back
                     </a>
                     <button type="submit"
-                        class="inline-flex items-center px-5 py-2 text-sm bg-gradient-to-r from-army-green-700 to-army-green-600 hover:from-army-green-800 hover:to-army-green-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all">
+                        class="inline-flex items-center px-5 py-2 text-sm bg-gradient-to-r from-primary-700 to-primary-600 hover:from-primary-800 hover:to-primary-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all">
                         <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                         </svg>
@@ -199,13 +199,13 @@
 
                 for (let i = 0; i < 4; i++) {
                     container.innerHTML += `
-                    <div class="p-3 border-2 border-gray-200 rounded-lg hover:border-army-green-300 transition-colors">
+                    <div class="p-3 border-2 border-gray-200 rounded-lg hover:border-primary-300 transition-colors">
                         <div class="flex items-start gap-3">
-                            <input type="radio" name="correct_option" value="${i}" required class="mt-2 w-4 h-4 text-army-green-700">
+                            <input type="radio" name="correct_option" value="${i}" required class="mt-2 w-4 h-4 text-primary-700">
                             <div class="flex-1">
                                 <label class="block text-sm font-semibold text-gray-700 mb-1.5">Option ${String.fromCharCode(65 + i)}</label>
                                 <input type="text" name="options[${i}]" required placeholder="Enter option text" 
-                                       class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-army-green-100 focus:border-army-green-600 outline-none mb-2">
+                                       class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 outline-none mb-2">
                                 <input type="file" name="option_images[${i}]" accept="image/jpeg,image/jpg,image/png" 
                                        class="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg">
                                 <p class="text-xs text-gray-500 mt-1">Optional image for this option (Max 2MB)</p>
@@ -221,16 +221,16 @@
                 const container = document.getElementById('optionsContainer');
                 container.innerHTML = `
                 <div class="space-y-3">
-                    <div class="p-3 border-2 border-gray-200 rounded-lg hover:border-army-green-300 transition-colors">
+                    <div class="p-3 border-2 border-gray-200 rounded-lg hover:border-primary-300 transition-colors">
                         <label class="flex items-center cursor-pointer">
-                            <input type="radio" name="correct_option" value="0" required class="w-4 h-4 text-army-green-700 mr-3">
+                            <input type="radio" name="correct_option" value="0" required class="w-4 h-4 text-primary-700 mr-3">
                             <span class="text-sm font-semibold text-gray-900">True</span>
                         </label>
                         <input type="hidden" name="options[0]" value="True">
                     </div>
-                    <div class="p-3 border-2 border-gray-200 rounded-lg hover:border-army-green-300 transition-colors">
+                    <div class="p-3 border-2 border-gray-200 rounded-lg hover:border-primary-300 transition-colors">
                         <label class="flex items-center cursor-pointer">
-                            <input type="radio" name="correct_option" value="1" required class="w-4 h-4 text-army-green-700 mr-3">
+                            <input type="radio" name="correct_option" value="1" required class="w-4 h-4 text-primary-700 mr-3">
                             <span class="text-sm font-semibold text-gray-900">False</span>
                         </label>
                         <input type="hidden" name="options[1]" value="False">
@@ -252,7 +252,7 @@
                     <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
                         <label class="block text-xs font-bold text-gray-600 mb-1.5">${i + 1}.</label>
                         <input type="text" name="column_a[${i}]" required placeholder="Item ${i + 1}" 
-                               class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-army-green-100 focus:border-army-green-600 outline-none">
+                               class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 outline-none">
                     </div>
                 `;
 
@@ -260,7 +260,7 @@
                     <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
                         <label class="block text-xs font-bold text-gray-600 mb-1.5">${String.fromCharCode(65 + i)}.</label>
                         <input type="text" name="column_b[${i}]" required placeholder="Match for item ${i + 1}" 
-                               class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-army-green-100 focus:border-army-green-600 outline-none">
+                               class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 outline-none">
                     </div>
                 `;
                 }

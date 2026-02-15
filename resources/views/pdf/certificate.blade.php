@@ -293,12 +293,12 @@
 
 <body>
     <div class="certificate-container">
-        <div class="watermark">PMA</div>
+        <div class="watermark">GBTS</div>
 
         <!-- Header -->
         <div class="header">
-            <div class="logo">PAKISTAN MILITARY ACADEMY</div>
-            <div class="subtitle">Assessment & Recruitment Centre, Gilgit</div>
+            <div class="logo">GILGIT BALTISTAN TESTING SERVICE (CBT)</div>
+            <div class="subtitle">GBTS, Gilgit</div>
             <div class="title">TEST CERTIFICATE</div>
             <div class="test-info">
                 <strong>{{ $testAttempt->testVersion->title }}</strong>
@@ -426,8 +426,8 @@
 
         <!-- Footer -->
         <div class="footer">
-            <div><strong>Computer-generated certificate from PMA Test Management System</strong></div>
-            <div>Assessment & Recruitment Centre, Gilgit | Pakistan Military Academy</div>
+            <div><strong>Computer-generated certificate from GBTS Computer Based Test Management System</strong></div>
+            <div>GBTS, Gilgit | Gilgit-Baltistan</div>
             <div style="margin-top: 3px;">Certificate ID: {{ strtoupper(substr($testAttempt->attempt_token, 0, 12)) }} |
                 Generated: {{ now()->format('d-M-Y h:i A') }}</div>
         </div>

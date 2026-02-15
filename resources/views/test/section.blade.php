@@ -13,7 +13,7 @@
                     <div class="md:col-span-2">
                         <div class="flex items-center mb-2">
                             <div
-                                class="inline-flex items-center px-3 py-1 bg-army-green-100 text-army-green-800 rounded-full text-sm font-semibold mr-3">
+                                class="inline-flex items-center px-3 py-1 bg-primary-100 text-primary-800 rounded-full text-sm font-semibold mr-3">
                                 Section {{ $currentSection->section_order + 1 }} of
                                 {{ $testAttempt->sectionAttempts->count() }}
                             </div>
@@ -29,7 +29,7 @@
                                     x-text="Math.round(((currentQuestion + 1) / {{ $questions->count() }}) * 100) + '%'"></span>
                             </div>
                             <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
-                                <div class="bg-gradient-to-r from-army-green-600 to-army-green-500 h-3 rounded-full transition-all duration-300"
+                                <div class="bg-gradient-to-r from-primary-600 to-primary-500 h-3 rounded-full transition-all duration-300"
                                     :style="`width: ${((currentQuestion + 1) / {{ $questions->count() }}) * 100}%`"></div>
                             </div>
                         </div>
@@ -38,7 +38,7 @@
                         <div class="mt-4 flex flex-wrap gap-2">
                             @foreach($questions as $index => $assignment)
                                 <button type="button" @click="currentQuestion = {{ $index }}" :class="{
-                                                                'bg-army-green-600 text-white': currentQuestion === {{ $index }},
+                                                                'bg-primary-600 text-white': currentQuestion === {{ $index }},
                                                                 'bg-green-100 text-green-700 border-green-300': currentQuestion !== {{ $index }} && isAnswered({{ $index }}),
                                                                 'bg-white text-gray-700 border-gray-300': currentQuestion !== {{ $index }} && !isAnswered({{ $index }})
                                                             }"
@@ -52,7 +52,7 @@
                     <!-- Timer Card -->
                     <div x-data="initSectionTimer('{{ $endTime->toIso8601String() }}')"
                         class="bg-gradient-to-br rounded-xl p-6 text-center"
-                        :class="isWarning() ? 'from-red-500 to-red-600' : 'from-army-green-600 to-army-green-700'">
+                        :class="isWarning() ? 'from-red-500 to-red-600' : 'from-primary-600 to-primary-700'">
                         <svg class="w-12 h-12 mx-auto mb-3 text-white" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -84,7 +84,7 @@
                     <div class="flex items-start gap-4 mb-6">
                         <div class="flex-shrink-0">
                             <div
-                                class="w-14 h-14 bg-gradient-to-br from-army-green-600 to-army-green-700 rounded-xl flex items-center justify-center shadow-lg">
+                                class="w-14 h-14 bg-gradient-to-br from-primary-600 to-primary-700 rounded-xl flex items-center justify-center shadow-lg">
                                 <span class="text-white font-bold text-lg">{{ $index + 1 }}</span>
                             </div>
                         </div>
@@ -128,11 +128,11 @@
                                 @foreach($question->options as $optIndex => $option)
                                     <label
                                         class="flex items-start px-4 py-2 border-2 rounded-xl cursor-pointer transition-all hover:shadow-md
-                                                                                    {{ $existingAnswer && $existingAnswer->selected_option_id == $option->id ? 'border-army-green-600 bg-army-green-50' : 'border-gray-300 hover:border-army-green-300' }}"
+                                                                                    {{ $existingAnswer && $existingAnswer->selected_option_id == $option->id ? 'border-primary-600 bg-primary-50' : 'border-gray-300 hover:border-primary-300' }}"
                                         @click="markAnswered({{ $index }})">
                                         <input type="radio" name="question_{{ $question->id }}" value="{{ $option->id }}" {{ $existingAnswer && $existingAnswer->selected_option_id == $option->id ? 'checked' : '' }}
                                             onchange="saveAnswer('{{ $testAttempt->attempt_token }}', {{ $question->id }}, { selected_option_id: {{ $option->id }} })"
-                                            class="mt-1 w-5 h-5 text-army-green-600 focus:ring-army-green-500">
+                                            class="mt-1 w-5 h-5 text-primary-600 focus:ring-primary-500">
 
                                         <div class="ml-4 flex-1">
                                             <span
@@ -170,7 +170,7 @@
                                         @foreach($question->matchingPairs->sortBy('pair_order') as $pair)
                                             <div class="flex items-center mb-4 p-4 bg-white rounded-lg border-2 border-gray-300">
                                                 <span
-                                                    class="flex-shrink-0 w-8 h-8 bg-army-green-600 text-white rounded-lg flex items-center justify-center font-bold mr-3">
+                                                    class="flex-shrink-0 w-8 h-8 bg-primary-600 text-white rounded-lg flex items-center justify-center font-bold mr-3">
                                                     {{ $pair->pair_order }}
                                                 </span>
                                                 <span class="flex-1 text-gray-900">{{ $pair->column_a_text }}</span>
@@ -181,7 +181,7 @@
                                                 </svg>
                                                 <select name="matching_{{ $question->id }}_{{ $pair->pair_order }}"
                                                     @change="markAnswered({{ $index }})"
-                                                    class="flex-shrink-0 px-3 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-army-green-100 focus:border-army-green-600 outline-none font-semibold"
+                                                    class="flex-shrink-0 px-3 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 outline-none font-semibold"
                                                     onchange="saveMatchingAnswer('{{ $testAttempt->attempt_token }}', {{ $question->id }})">
                                                     <option value="">--</option>
                                                     @foreach($question->shuffled_column_b ?? $question->matchingPairs->pluck('column_b_text', 'column_b_key') as $key => $text)
@@ -232,7 +232,7 @@
                     </div>
 
                     <button type="button" @click="nextQuestion()" x-show="currentQuestion < {{ $questions->count() - 1 }}"
-                        class="inline-flex items-center px-6 py-2 bg-gradient-to-r from-army-green-700 to-army-green-600 hover:from-army-green-800 hover:to-army-green-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all">
+                        class="inline-flex items-center px-6 py-2 bg-gradient-to-r from-primary-700 to-primary-600 hover:from-primary-800 hover:to-primary-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all">
                         Next
                         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -244,7 +244,7 @@
                         onsubmit="return confirm('Are you sure you want to move to the next section? You cannot come back to this section.')">
                         @csrf
                         <button type="submit"
-                            class="inline-flex items-center px-8 py-2 bg-gradient-to-r from-army-green-700 to-army-green-600 hover:from-army-green-700 hover:to-army-green-800 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition-all">
+                            class="inline-flex items-center px-8 py-2 bg-gradient-to-r from-primary-700 to-primary-600 hover:from-primary-700 hover:to-primary-800 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition-all">
                             {{ $testAttempt->current_section_index + 1 < $testAttempt->sectionAttempts->count() ? 'Next Section' : 'Complete Test' }}
                             <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

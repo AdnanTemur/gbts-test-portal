@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="mb-8">
-        <h1 class="text-3xl font-bold text-army-green-700">Dashboard</h1>
+        <h1 class="text-3xl font-bold text-primary-700">Dashboard</h1>
         <p class="text-gray-600 mt-1">Welcome back! Here's what's happening with your tests today.</p>
     </div>
 
@@ -140,7 +140,7 @@
                 <div class="flex items-center justify-between">
                     <h2 class="text-lg font-bold text-gray-900">Recent Test Attempts</h2>
                     <a href="{{ route('admin.candidates.index') }}"
-                        class="text-sm font-medium text-army-green-700 hover:text-army-green-800">
+                        class="text-sm font-medium text-primary-700 hover:text-primary-800">
                         View all →
                     </a>
                 </div>
@@ -235,11 +235,11 @@
         <!-- Quick Actions -->
         <div class="space-y-6">
             <!-- Quick Stats Card -->
-            <div class="bg-gradient-to-br from-army-green-700 to-army-green-800 rounded-lg shadow-sm p-6 text-white">
+            <div class="bg-gradient-to-br from-primary-700 to-primary-800 rounded-lg shadow-sm p-6 text-white">
                 <h3 class="text-lg font-bold mb-4">Quick Actions</h3>
                 <div class="space-y-3">
                     <a href="{{ route('admin.questions.create') }}"
-                        class="block bg-army-green-900 bg-opacity-20 hover:bg-opacity-30 rounded-lg p-3 transition-all">
+                        class="block bg-primary-900 bg-opacity-20 hover:bg-opacity-30 rounded-lg p-3 transition-all">
                         <div class="flex items-center">
                             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -248,7 +248,7 @@
                         </div>
                     </a>
                     <a href="{{ route('admin.test-versions.create') }}"
-                        class="block bg-army-green-900 bg-opacity-20 hover:bg-opacity-30 rounded-lg p-3 transition-all">
+                        class="block bg-primary-900 bg-opacity-20 hover:bg-opacity-30 rounded-lg p-3 transition-all">
                         <div class="flex items-center">
                             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -258,7 +258,7 @@
                         </div>
                     </a>
                     <a href="{{ route('admin.reports.index') }}"
-                        class="block bg-army-green-900 bg-opacity-20 hover:bg-opacity-30 rounded-lg p-3 transition-all">
+                        class="block bg-primary-900 bg-opacity-20 hover:bg-opacity-30 rounded-lg p-3 transition-all">
                         <div class="flex items-center">
                             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

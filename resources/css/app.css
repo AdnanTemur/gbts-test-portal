@@ -11,17 +11,17 @@
         "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
     /* Primary - Army Green (based on #1a985d) */
-    --color-army-green-50: #edfdf4;
-    --color-army-green-100: #d4f9e4;
-    --color-army-green-200: #acf2cd;
-    --color-army-green-300: #75e6ae;
-    --color-army-green-400: #3dd389;
-    --color-army-green-500: #1a985d;
-    --color-army-green-600: #0f9654;
-    --color-army-green-700: #107847;
-    --color-army-green-800: #115f3b;
-    --color-army-green-900: #104e33;
-    --color-army-green-950: #042b1b;
+    --color-primary-50: #edfdf4;
+    --color-primary-100: #d4f9e4;
+    --color-primary-200: #acf2cd;
+    --color-primary-300: #75e6ae;
+    --color-primary-400: #3dd389;
+    --color-primary-500: #1a985d;
+    --color-primary-600: #0f9654;
+    --color-primary-700: #107847;
+    --color-primary-800: #115f3b;
+    --color-primary-900: #104e33;
+    --color-primary-950: #042b1b;
 
     /* Secondary - Slate (neutral, modern) */
     --color-slate-50: #f8fafc;
@@ -89,11 +89,11 @@
 }
 
 .option-button:hover {
-    @apply border-army-green-600 bg-army-green-50;
+    @apply border-primary-600 bg-primary-50;
 }
 
 .option-button.selected {
-    @apply border-army-green-600 bg-army-green-100;
+    @apply border-primary-600 bg-primary-100;
 }
 
 .matching-dropdown {

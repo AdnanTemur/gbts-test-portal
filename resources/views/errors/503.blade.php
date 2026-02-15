@@ -30,7 +30,7 @@
             <!-- Action Button -->
             <div class="flex justify-center">
                 <button onclick="location.reload()"
-                    class="inline-flex items-center px-8 py-3 bg-gradient-to-r from-army-green-700 to-army-green-600 hover:from-army-green-800 hover:to-army-green-700 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition-all">
+                    class="inline-flex items-center px-8 py-3 bg-gradient-to-r from-primary-700 to-primary-600 hover:from-primary-800 hover:to-primary-700 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition-all">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />

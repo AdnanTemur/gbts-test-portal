@@ -28,6 +28,9 @@ class TestAttempt extends Model
         'current_section_index',
         'status',
         'passed',
+        'device_fingerprint',
+        'ip_address',
+        'expires_at',
     ];
 
     protected $casts = [

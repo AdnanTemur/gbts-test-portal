@@ -15,7 +15,7 @@
 
                 <!-- Logo -->
                 <a href="{{ route('admin.dashboard') }}" class="flex ml-2 md:mr-24">
-                    <div class="h-10 w-10 bg-army-green-700 rounded-lg flex items-center justify-center">
+                    <div class="h-10 w-10 bg-primary-700 rounded-lg flex items-center justify-center">
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
@@ -47,7 +47,7 @@
                             class="flex items-center text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300">
                             <span class="sr-only">Open user menu</span>
                             <div
-                                class="w-8 h-8 cursor-pointer rounded-full bg-army-green-700 flex items-center justify-center text-white font-semibold">
+                                class="w-8 h-8 cursor-pointer rounded-full bg-primary-700 flex items-center justify-center text-white font-semibold">
                                 {{ strtoupper(substr(auth()->user()->name, 0, 2)) }}
                             </div>
                         </button>

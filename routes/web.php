@@ -26,18 +26,21 @@ Route::get('/candidate/register', function () {
 // Test taking routes
 Route::get('/test/start/{token}', [TestController::class, 'start'])->name('test.start');
 Route::get('/test/instructions/{token}', [TestController::class, 'instructions'])->name('test.instructions');
-Route::post('/test/begin/{token}', [TestController::class, 'begin'])->name('test.begin');
-Route::get('/test/section/{token}', [TestController::class, 'section'])->name('test.section');
-Route::post('/test/answer/{token}', [TestController::class, 'saveAnswer'])->name('test.answer');
-Route::post('/test/next-section/{token}', [TestController::class, 'nextSection'])->name('test.nextSection');
-Route::post('/test/submit/{token}', [TestController::class, 'submit'])->name('test.submit');
+Route::post('/test/begin/{token}', [TestController::class, 'begin'])->name('test.begin')->middleware('throttle:5,1');
+
+Route::middleware('secure.test')->group(function () {
+    Route::get('/test/section/{token}', [TestController::class, 'section'])->name('test.section');
+    Route::post('/test/answer/{token}', [TestController::class, 'saveAnswer'])->name('test.answer');
+    Route::post('/test/next-section/{token}', [TestController::class, 'nextSection'])->name('test.nextSection');
+    Route::post('/test/submit/{token}', [TestController::class, 'submit'])->name('test.submit');
+});
 
 // Result routes
-// Route::middleware('test.result.access')->group(function () {
+Route::middleware('test.result.access')->group(function () {
     Route::get('/results/{token}', [ResultController::class, 'show'])->name('results.show');
     Route::get('/results/{token}/pdf', [ResultController::class, 'pdf'])->name('results.pdf');
     Route::get('/results/{token}/pdf/answersheet', [ResultController::class, 'answerSheetPdf'])->name('results.pdf.answersheet');
-// });
+});
 
 // Auth routes
 Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('login');

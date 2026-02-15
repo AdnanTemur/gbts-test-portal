@@ -7,7 +7,7 @@
         <!-- Header -->
         <div class="mb-6">
             <div class="flex items-center justify-between">
-                <h1 class="text-3xl font-bold text-army-green-700">Candidate Details</h1>
+                <h1 class="text-3xl font-bold text-primary-700">Candidate Details</h1>
                 <a href="{{ route('admin.candidates.index') }}"
                     class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -24,7 +24,7 @@
             <div class="flex items-start gap-6">
                 @if($candidate->photo)
                     <img src="{{ Storage::url($candidate->photo) }}" alt="{{ $candidate->name }}"
-                        class="w-32 h-32 rounded-xl object-cover border-4 border-army-green-600 shadow-lg">
+                        class="w-32 h-32 rounded-xl object-cover border-4 border-primary-600 shadow-lg">
                 @else
                     <div
                         class="w-32 h-32 rounded-xl bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center shadow-lg">
@@ -68,8 +68,8 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
             <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
                 <div class="flex items-center">
-                    <div class="p-3 bg-army-green-50 rounded-lg mr-4">
-                        <svg class="w-6 h-6 text-army-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="p-3 bg-primary-50 rounded-lg mr-4">
+                        <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                         </svg>

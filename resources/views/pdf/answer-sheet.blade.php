@@ -233,8 +233,8 @@
 
 <body>
     <div class="header">
-        <div class="logo">PAKISTAN MILITARY ACADEMY</div>
-        <div style="font-size: 11px; color: #666;">AS & RC, Gilgit</div>
+        <div class="logo">GILGIT BALTISTAN TESTING SERVICE (CBT)</div>
+        <div style="font-size: 11px; color: #666;">GBTS, Gilgit</div>
         <div class="title">DETAILED ANSWER SHEET</div>
         <div style="font-size: 10px; color: #666;">{{ $testAttempt->testVersion->title }}</div>
     </div>
@@ -393,9 +393,9 @@
         <div><strong>Test Version:</strong> {{ $testAttempt->testVersion->version_code }}</div>
         <div><strong>Pass Threshold:</strong> {{ $testAttempt->testVersion->pass_threshold }}%</div>
         <div><strong>Status:</strong> {{ $testAttempt->passed ? 'PASSED' : 'NOT PASSED' }}</div>
-        <div style="margin-top: 10px;">This is a computer-generated answer sheet from the PMA Test Management System
+        <div style="margin-top: 10px;">This is a computer-generated answer sheet from the GBTS Computer Based Test Management System
         </div>
-        <div>AS & RC, Gilgit | Pakistan Military Academy</div>
+        <div>GBTS, Gilgit | Gilgit Baltistan</div>
         <div style="margin-top: 5px;">Generated on {{ now()->format('F d, Y \a\t h:i A') }}</div>
     </div>
 </body>

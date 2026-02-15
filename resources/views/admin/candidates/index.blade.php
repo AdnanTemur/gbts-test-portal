@@ -6,7 +6,7 @@
 <div class="mb-8">
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-3xl font-bold text-army-green-700">Candidates</h1>
+            <h1 class="text-3xl font-bold text-primary-700">Candidates</h1>
             <p class="text-gray-600 mt-1">View all registered candidates and their test history</p>
         </div>
     </div>
@@ -23,10 +23,10 @@
                    name="search" 
                    value="{{ request('search') }}"
                    placeholder="Search by CNIC, name, or phone..."
-                   class="flex-1 px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-army-green-100 focus:border-army-green-600 outline-none">
+                   class="flex-1 px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 outline-none">
         </div>
         <button type="submit" 
-                class="inline-flex items-center px-4 py-2 text-sm bg-army-green-700 hover:bg-army-green-800 text-white font-medium rounded-lg transition-colors">
+                class="inline-flex items-center px-4 py-2 text-sm bg-primary-700 hover:bg-primary-800 text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
             </svg>
@@ -48,8 +48,8 @@
 <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
         <div class="flex items-center">
-            <div class="p-3 bg-army-green-50 rounded-lg mr-4">
-                <svg class="w-6 h-6 text-army-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="p-3 bg-primary-50 rounded-lg mr-4">
+                <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                 </svg>
             </div>

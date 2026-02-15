@@ -8,7 +8,7 @@
     <div class="mb-6">
         <div class="flex items-center justify-between">
             <div>
-                <h1 class="text-2xl font-bold text-army-green-700">Edit Test Version</h1>
+                <h1 class="text-2xl font-bold text-primary-700">Edit Test Version</h1>
                 <p class="text-sm text-gray-600 mt-1">{{ $testVersion->version_code }}</p>
             </div>
         </div>
@@ -17,7 +17,7 @@
     <!-- Form Card -->
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
         <!-- Card Header -->
-        <div class="px-5 py-3 bg-gradient-to-r from-army-green-700 to-army-green-600 border-b border-army-green-800">
+        <div class="px-5 py-3 bg-gradient-to-r from-primary-700 to-primary-600 border-b border-primary-800">
             <h2 class="text-base font-semibold text-white">Test Version Details</h2>
         </div>
 
@@ -48,7 +48,7 @@
                                value="{{ old('title', $testVersion->title) }}"
                                required
                                placeholder="e.g., Long Test 2025"
-                               class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-army-green-100 focus:border-army-green-600 outline-none">
+                               class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 outline-none">
                         @error('title')
                             <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
                         @enderror
@@ -60,7 +60,7 @@
                                   name="description" 
                                   rows="2"
                                   placeholder="Optional description for this test version..."
-                                  class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-army-green-100 focus:border-army-green-600 outline-none">{{ old('description', $testVersion->description) }}</textarea>
+                                  class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 outline-none">{{ old('description', $testVersion->description) }}</textarea>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@
                                    required
                                    min="1"
                                    placeholder="20"
-                                   class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-army-green-100 focus:border-army-green-600 outline-none">
+                                   class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 outline-none">
                         </div>
 
                         <div>
@@ -96,7 +96,7 @@
                                    required
                                    min="1"
                                    placeholder="50"
-                                   class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-army-green-100 focus:border-army-green-600 outline-none">
+                                   class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 outline-none">
                         </div>
                     </div>
 
@@ -112,7 +112,7 @@
                                    required
                                    min="1"
                                    placeholder="100"
-                                   class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-army-green-100 focus:border-army-green-600 outline-none">
+                                   class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 outline-none">
                         </div>
 
                         <div>
@@ -127,7 +127,7 @@
                                    min="0"
                                    max="100"
                                    placeholder="30"
-                                   class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-army-green-100 focus:border-army-green-600 outline-none">
+                                   class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 outline-none">
                         </div>
 
                         <div>
@@ -142,7 +142,7 @@
                                    min="0"
                                    max="100"
                                    placeholder="60"
-                                   class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-army-green-100 focus:border-army-green-600 outline-none">
+                                   class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 outline-none">
                         </div>
                     </div>
 
@@ -151,7 +151,7 @@
                             <label class="flex items-center cursor-pointer">
                                 <input type="checkbox" name="shuffle_questions" value="1" 
                                        {{ old('shuffle_questions', $testVersion->shuffle_questions) ? 'checked' : '' }}
-                                       class="w-4 h-4 text-army-green-700 border-gray-300 rounded focus:ring-army-green-600">
+                                       class="w-4 h-4 text-primary-700 border-gray-300 rounded focus:ring-primary-600">
                                 <span class="ml-2 text-sm font-medium text-gray-900">Shuffle questions</span>
                             </label>
                         </div>
@@ -160,7 +160,7 @@
                             <label class="flex items-center cursor-pointer">
                                 <input type="checkbox" name="shuffle_options" value="1" 
                                        {{ old('shuffle_options', $testVersion->shuffle_options) ? 'checked' : '' }}
-                                       class="w-4 h-4 text-army-green-700 border-gray-300 rounded focus:ring-army-green-600">
+                                       class="w-4 h-4 text-primary-700 border-gray-300 rounded focus:ring-primary-600">
                                 <span class="ml-2 text-sm font-medium text-gray-900">Shuffle options/pairs</span>
                             </label>
                         </div>
@@ -180,7 +180,7 @@
                         $currentSections = $testVersion->testSections->sortBy('pivot.section_order');
                     @endphp
                     @foreach($currentSections as $index => $section)
-                        <div class="flex items-center p-3 bg-gray-50 border-2 border-gray-300 rounded-lg cursor-move hover:border-army-green-400 transition-colors" draggable="true">
+                        <div class="flex items-center p-3 bg-gray-50 border-2 border-gray-300 rounded-lg cursor-move hover:border-primary-400 transition-colors" draggable="true">
                             <svg class="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"/>
                             </svg>
@@ -188,8 +188,8 @@
                             <div class="flex-1">
                                 <span class="text-sm font-semibold text-gray-900">{{ $section->name }}</span>
                             </div>
-                            <div class="flex items-center px-2.5 py-1 bg-army-green-100 rounded-md">
-                                <span class="text-xs text-army-green-800">Order: <span class="font-bold">{{ $index + 1 }}</span></span>
+                            <div class="flex items-center px-2.5 py-1 bg-primary-100 rounded-md">
+                                <span class="text-xs text-primary-800">Order: <span class="font-bold">{{ $index + 1 }}</span></span>
                             </div>
                         </div>
                     @endforeach
@@ -202,7 +202,7 @@
                     Status <span class="text-red-500">*</span>
                 </label>
                 <select id="status" name="status" required 
-                        class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-army-green-100 focus:border-army-green-600 outline-none">
+                        class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 outline-none">
                     <option value="draft" {{ old('status', $testVersion->status) == 'draft' ? 'selected' : '' }}>Draft</option>
                     <option value="active" {{ old('status', $testVersion->status) == 'active' ? 'selected' : '' }}>Active</option>
                     <option value="completed" {{ old('status', $testVersion->status) == 'completed' ? 'selected' : '' }}>Completed</option>
@@ -220,7 +220,7 @@
                     Back
                 </a>
                 <button type="submit" 
-                        class="inline-flex items-center px-5 py-2 text-sm bg-gradient-to-r from-army-green-700 to-army-green-600 hover:from-army-green-800 hover:to-army-green-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all">
+                        class="inline-flex items-center px-5 py-2 text-sm bg-gradient-to-r from-primary-700 to-primary-600 hover:from-primary-800 hover:to-primary-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all">
                     <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                     </svg>

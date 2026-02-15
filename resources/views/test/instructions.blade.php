@@ -5,7 +5,7 @@
 @section('content')
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="bg-white rounded-lg shadow-md p-8">
-            <h1 class="text-3xl font-bold text-army-green-900 mb-6 text-center">
+            <h1 class="text-3xl font-bold text-primary-900 mb-6 text-center">
                 Test Instructions
             </h1>
 
@@ -82,19 +82,19 @@
                 </div>
             </div>
 
-            <div class="bg-army-green-50 border border-army-green-200 rounded-lg p-6 mb-6">
-                <h3 class="font-bold text-army-green-900 mb-2 text-center">Section Order</h3>
+            <div class="bg-primary-50 border border-primary-200 rounded-lg p-6 mb-6">
+                <h3 class="font-bold text-primary-900 mb-2 text-center">Section Order</h3>
                 <div class="flex justify-center items-center space-x-4 text-sm">
                     @foreach($testAttempt->testVersion->testSections as $index => $section)
                         <div class="text-center">
                             <div
-                                class="bg-army-green-700 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mb-1">
+                                class="bg-primary-700 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mb-1">
                                 {{ $index + 1 }}
                             </div>
                             <div class="text-gray-700">{{ $section->name }}</div>
                         </div>
                         @if(!$loop->last)
-                            <div class="text-army-green-600">→</div>
+                            <div class="text-primary-600">→</div>
                         @endif
                     @endforeach
                 </div>
@@ -114,7 +114,7 @@
 
                 <div class="text-center">
                     <button type="submit"
-                        class="bg-army-green-700 hover:bg-army-green-800 text-white font-bold py-4 px-12 rounded-lg text-lg transition-colors">
+                        class="bg-primary-700 hover:bg-primary-800 text-white font-bold py-4 px-12 rounded-lg text-lg transition-colors">
                         I Understand, Start Test
                     </button>
                 </div>

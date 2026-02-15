@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\SecureTestAccess;
 use App\Http\Middleware\TestResultAccess;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -14,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'test.result.access' => TestResultAccess::class,
+            'secure.test' => SecureTestAccess::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

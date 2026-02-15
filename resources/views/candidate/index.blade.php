@@ -13,14 +13,14 @@
                 <!-- Dark Overlay -->
                 <div class="absolute inset-0 bg-black/50"></div>
                 <!-- Green Gradient Overlay -->
-                <div class="absolute inset-0 bg-gradient-to-t from-army-green-900/80 via-transparent to-transparent"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-primary-900/80 via-transparent to-transparent"></div>
             </div>
 
             <!-- Hero Content -->
             <div class="relative z-10 h-full flex flex-col justify-center items-center px-4 text-center pt-16 pb-48">
                 <!-- Badge -->
                 <div
-                    class="inline-flex items-center px-4 py-2 bg-army-green-600/90 backdrop-blur-sm rounded-full mb-6 shadow-lg">
+                    class="inline-flex items-center px-4 py-2 bg-primary-600/90 backdrop-blur-sm rounded-full mb-6 shadow-lg">
                     <svg class="w-4 h-4 text-white mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -33,7 +33,7 @@
 
                 <!-- Main Title -->
                 <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight drop-shadow-lg">
-                    GBTS Mock Test
+                    GBTS Computer Based Test
                 </h1>
 
                 <!-- Subtitle -->
@@ -43,7 +43,7 @@
 
                 <!-- CTA Button -->
                 <a href="#tests"
-                    class="inline-flex items-center px-6 py-3 bg-army-green-600 hover:bg-army-green-700 text-white font-semibold text-base rounded-full transition-all duration-300 shadow-xl hover:shadow-army-green-500/30 transform hover:scale-105 group">
+                    class="inline-flex items-center px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold text-base rounded-full transition-all duration-300 shadow-xl hover:shadow-primary-500/30 transform hover:scale-105 group">
                     <span>Get Started</span>
                     <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none"
                         stroke="currentColor" viewBox="0 0 24 24">
@@ -111,23 +111,23 @@
                         <div
                             class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow duration-300">
                             <!-- Header -->
-                            <div class="bg-gradient-to-r from-army-green-700 to-army-green-600 px-8 py-6">
+                            <div class="bg-gradient-to-r from-primary-700 to-primary-600 px-8 py-6">
                                 <div class="flex items-start justify-between">
                                     <div>
                                         <h3 class="text-3xl font-bold text-white mb-2">{{ $testVersion->title }}</h3>
                                         <div class="inline-flex items-center px-3 py-1 bg-white bg-opacity-20 rounded-full">
-                                            <svg class="w-4 h-4 text-army-green-900 mr-2" fill="none" stroke="currentColor"
+                                            <svg class="w-4 h-4 text-primary-900 mr-2" fill="none" stroke="currentColor"
                                                 viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
                                             </svg>
                                             <span
-                                                class="text-sm font-medium text-army-green-900 text-center">{{ $testVersion->version_code }}</span>
+                                                class="text-sm font-medium text-primary-900 text-center">{{ $testVersion->version_code }}</span>
                                         </div>
                                     </div>
                                     <div class="text-right">
                                         <span
-                                            class="inline-flex items-center px-4 py-2 bg-white rounded-lg text-army-green-700 font-bold">
+                                            class="inline-flex items-center px-4 py-2 bg-white rounded-lg text-primary-700 font-bold">
                                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -137,7 +137,7 @@
                                     </div>
                                 </div>
                                 @if($testVersion->description)
-                                    <p class="text-army-green-50 mt-4 text-sm leading-relaxed">
+                                    <p class="text-primary-50 mt-4 text-sm leading-relaxed">
                                         {{ $testVersion->description }}
                                     </p>
                                 @endif
@@ -235,12 +235,12 @@
                                             </label>
                                             <input type="text" id="cnic_{{ $testVersion->id }}" name="cnic"
                                                 placeholder="12345-1234567-1" pattern="[0-9]{5}-[0-9]{7}-[0-9]{1}" required
-                                                class="w-full px-5 py-2 text-lg border-2 border-gray-300 rounded-xl focus:border-army-green-600 focus:ring-4 focus:ring-army-green-100 transition-all outline-none">
+                                                class="w-full px-5 py-2 text-lg border-2 border-gray-300 rounded-xl focus:border-primary-600 focus:ring-4 focus:ring-primary-100 transition-all outline-none">
                                             <p class="mt-2 text-xs text-gray-500">Format: xxxxx-xxxxxxx-x</p>
                                         </div>
 
                                         <button type="submit"
-                                            class="w-full bg-gradient-to-r from-army-green-700 to-army-green-600 hover:from-army-green-800 hover:to-army-green-700 text-white font-bold py-2 px-6 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center group">
+                                            class="w-full bg-gradient-to-r from-primary-700 to-primary-600 hover:from-primary-800 hover:to-primary-700 text-white font-bold py-2 px-6 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center group">
                                             <span class="text-lg">Start Test</span>
                                             <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none"
                                                 stroke="currentColor" viewBox="0 0 24 24">
@@ -284,8 +284,8 @@
             <div class="mt-12 text-center">
                 <p class="text-gray-600">
                     Need help? Contact the administrator at
-                    <a href="mailto:admin@asrc.mil"
-                        class="text-army-green-700 font-semibold hover:underline">admin@asrc.mil</a>
+                    <a href="mailto:admin@gbtsportal.com"
+                        class="text-primary-700 font-semibold hover:underline">admin@gbtsportal.com</a>
                 </p>
             </div>
         </div>

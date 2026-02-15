@@ -8,7 +8,7 @@
         <div class="mb-6">
             <div class="flex items-center justify-between">
                 <div>
-                    <h1 class="text-3xl font-bold text-army-green-700">Category-wise Report</h1>
+                    <h1 class="text-3xl font-bold text-primary-700">Category-wise Report</h1>
                     <p class="text-gray-600 mt-1">Section-wise performance analysis and insights</p>
                 </div>
                 <a href="{{ route('admin.reports.index') }}"
@@ -54,7 +54,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 @php
                     $colors = [
-                        ['from' => 'from-army-green-700', 'to' => 'to-army-green-600', 'bg' => 'bg-army-green-50', 'text' => 'text-army-green-700', 'bar' => 'bg-army-green-600', 'border' => 'border-army-green-200'],
+                        ['from' => 'from-primary-700', 'to' => 'to-primary-600', 'bg' => 'bg-primary-50', 'text' => 'text-primary-700', 'bar' => 'bg-primary-600', 'border' => 'border-primary-200'],
                         ['from' => 'from-teal-700', 'to' => 'to-teal-600', 'bg' => 'bg-teal-50', 'text' => 'text-teal-700', 'bar' => 'bg-teal-600', 'border' => 'border-teal-200'],
                         ['from' => 'from-emerald-700', 'to' => 'to-emerald-600', 'bg' => 'bg-emerald-50', 'text' => 'text-emerald-700', 'bar' => 'bg-emerald-600', 'border' => 'border-emerald-200'],
                         ['from' => 'from-cyan-700', 'to' => 'to-cyan-600', 'bg' => 'bg-cyan-50', 'text' => 'text-cyan-700', 'bar' => 'bg-cyan-600', 'border' => 'border-cyan-200'],

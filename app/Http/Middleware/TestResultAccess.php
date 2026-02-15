@@ -48,9 +48,9 @@ class TestResultAccess
             return true;
         }
 
-        // 2. Allow if this token is in the current session (just completed)
-        $sessionToken = session('completed_test_token');
-        if ($sessionToken === $testAttempt->attempt_token) {
+        // 2. Candidate can view if they own this attempt
+        $candidateId = session('candidate_id');
+        if ($candidateId && $candidateId === $testAttempt->candidate_id) {
             return true;
         }
 

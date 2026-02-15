@@ -17,7 +17,7 @@
             @if($testAttempt->candidate->photo)
                 <img src="{{ Storage::url($testAttempt->candidate->photo) }}" 
                      alt="{{ $testAttempt->candidate->name }}"
-                     class="w-24 h-24 rounded-full object-cover border-4 border-army-green-600 mr-6">
+                     class="w-24 h-24 rounded-full object-cover border-4 border-primary-600 mr-6">
             @endif
             <div class="text-left">
                 <h2 class="text-2xl font-bold text-gray-900">{{ $testAttempt->candidate->name }}</h2>
@@ -238,7 +238,7 @@
             🖨️ Print Results
         </button>
         <a href="{{ route('home') }}"
-           class="bg-army-green-700 hover:bg-army-green-800 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+           class="bg-primary-700 hover:bg-primary-800 text-white font-bold py-2 px-4 rounded-lg transition-colors">
             ← Back to Home
         </a>
     </div>

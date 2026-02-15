@@ -7,7 +7,7 @@
         <div class="max-w-3xl w-full">
             <!-- Header -->
             <div class="text-center mb-8">
-                <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-army-green-700 to-army-green-600 rounded-full mb-4 shadow-lg">
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-700 to-primary-600 rounded-full mb-4 shadow-lg">
                     <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
@@ -19,7 +19,7 @@
             <!-- Main Card -->
             <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
                 <!-- Notice Banner -->
-                <div class="px-8 py-4 bg-gradient-to-r from-army-green-700 to-army-green-600 border-b">
+                <div class="px-8 py-4 bg-gradient-to-r from-primary-700 to-primary-600 border-b">
                     <div class="flex items-start">
                         <svg class="w-6 h-6 text-white mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -40,7 +40,7 @@
                             @if($candidate->photo)
                                 <img src="{{ Storage::url($candidate->photo) }}" 
                                      alt="{{ $candidate->name }}"
-                                     class="w-28 h-28 rounded-xl object-cover border-4 border-army-green-600 shadow-lg flex-shrink-0">
+                                     class="w-28 h-28 rounded-xl object-cover border-4 border-primary-600 shadow-lg flex-shrink-0">
                             @else
                                 <div class="w-28 h-28 rounded-xl bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center border-4 border-gray-400 shadow-lg flex-shrink-0">
                                     <svg class="w-14 h-14 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
@@ -94,21 +94,21 @@
                     <!-- Test Details Section -->
                     <div class="mb-8">
                         <h3 class="text-lg font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">Test Information</h3>
-                        <div class="p-5 bg-gradient-to-r from-army-green-50 to-emerald-50 rounded-xl border-2 border-army-green-200">
+                        <div class="p-5 bg-gradient-to-r from-primary-50 to-emerald-50 rounded-xl border-2 border-primary-200">
                             <div class="flex items-start">
                                 <div class="p-3 bg-white rounded-lg shadow-sm mr-4">
-                                    <svg class="w-8 h-8 text-army-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                     </svg>
                                 </div>
                                 <div class="flex-1">
-                                    <p class="text-sm font-semibold text-army-green-700 uppercase mb-1">Test Version</p>
-                                    <h4 class="text-xl font-bold text-army-green-900 mb-2">{{ $testVersion->title }}</h4>
-                                    <div class="inline-flex items-center px-3 py-1 bg-white rounded-lg border border-army-green-300 shadow-sm">
-                                        <svg class="w-4 h-4 text-army-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <p class="text-sm font-semibold text-primary-700 uppercase mb-1">Test Version</p>
+                                    <h4 class="text-xl font-bold text-primary-900 mb-2">{{ $testVersion->title }}</h4>
+                                    <div class="inline-flex items-center px-3 py-1 bg-white rounded-lg border border-primary-300 shadow-sm">
+                                        <svg class="w-4 h-4 text-primary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
                                         </svg>
-                                        <span class="text-sm font-mono font-semibold text-army-green-800">{{ $testVersion->version_code }}</span>
+                                        <span class="text-sm font-mono font-semibold text-primary-800">{{ $testVersion->version_code }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -151,7 +151,7 @@
                             </a>
 
                             <button type="submit"
-                                    class="inline-flex items-center px-8 py-3 bg-gradient-to-r from-army-green-700 to-army-green-600 hover:from-army-green-800 hover:to-army-green-700 text-white font-bold rounded-lg shadow-md hover:shadow-lg transition-all duration-200">
+                                    class="inline-flex items-center px-8 py-3 bg-gradient-to-r from-primary-700 to-primary-600 hover:from-primary-800 hover:to-primary-700 text-white font-bold rounded-lg shadow-md hover:shadow-lg transition-all duration-200">
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
                                 </svg>

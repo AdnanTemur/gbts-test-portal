@@ -56,7 +56,7 @@
 
 <body class="relative overflow-hidden min-h-screen">
     <!-- Animated Background -->
-    <div class="fixed inset-0 bg-gradient-to-br from-army-green-900 to-army-green-800">
+    <div class="fixed inset-0 bg-gradient-to-br from-primary-900 to-primary-800">
     </div>
 
     <!-- Animated Blurred Blobs - More Visible -->
@@ -98,13 +98,13 @@
             <!-- Logo Card - Reduced size -->
             <div class="text-center mb-6">
                 <div class="inline-flex items-center justify-center w-16 h-16 bg-white rounded-xl shadow-2xl mb-3">
-                    <svg class="w-8 h-8 text-army-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-8 h-8 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                     </svg>
                 </div>
                 <h1 class="text-3xl font-bold text-white mb-1 drop-shadow-lg">{{ config('app.name', 'GBTS Test Portal') }} Admin Panel</h1>
-                <p class="text-army-green-100">GBTS, Gilgit, Gilgit-Baltistan</p>
+                <p class="text-primary-100">GBTS, Gilgit, Gilgit-Baltistan</p>
             </div>
 
             <!-- Login Card - Reduced padding -->
@@ -152,8 +152,8 @@
                                 </svg>
                             </div>
                             <input type="email" id="email" name="email" value="{{ old('email') }}" required autofocus
-                                placeholder="admin@asrc.mil"
-                                class="w-full pl-10 pr-4 py-2.5 border-2 border-gray-300 rounded-lg focus:ring-4 focus:ring-army-green-100 focus:border-army-green-600 transition-all outline-none text-sm">
+                                placeholder="admin@mail.com"
+                                class="w-full pl-10 pr-4 py-2.5 border-2 border-gray-300 rounded-lg focus:ring-4 focus:ring-primary-100 focus:border-primary-600 transition-all outline-none text-sm">
                         </div>
                     </div>
 
@@ -171,14 +171,14 @@
                                 </svg>
                             </div>
                             <input type="password" id="password" name="password" required placeholder="••••••••"
-                                class="w-full pl-10 pr-4 py-2.5 border-2 border-gray-300 rounded-lg focus:ring-4 focus:ring-army-green-100 focus:border-army-green-600 transition-all outline-none text-sm">
+                                class="w-full pl-10 pr-4 py-2.5 border-2 border-gray-300 rounded-lg focus:ring-4 focus:ring-primary-100 focus:border-primary-600 transition-all outline-none text-sm">
                         </div>
                     </div>
 
                     <!-- Remember Me -->
                     <div class="flex items-center pt-1">
                         <input type="checkbox" id="remember" name="remember"
-                            class="w-4 h-4 text-army-green-700 border-gray-300 rounded focus:ring-army-green-600">
+                            class="w-4 h-4 text-primary-700 border-gray-300 rounded focus:ring-primary-600">
                         <label for="remember" class="ml-2 text-sm text-gray-700">
                             Remember me for 30 days
                         </label>
@@ -186,7 +186,7 @@
 
                     <!-- Submit Button -->
                     <button type="submit"
-                        class="w-full bg-gradient-to-r from-army-green-700 to-army-green-600 hover:from-army-green-800 hover:to-army-green-700 text-white font-bold py-3 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center group mt-5">
+                        class="w-full bg-gradient-to-r from-primary-700 to-primary-600 hover:from-primary-800 hover:to-primary-700 text-white font-bold py-3 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center group mt-5">
                         <span>Sign In</span>
                         <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none"
                             stroke="currentColor" viewBox="0 0 24 24">
@@ -208,7 +208,7 @@
 
                 <!-- Back to Portal Link -->
                 <a href="{{ route('home') }}"
-                    class="flex items-center justify-center text-sm text-gray-600 hover:text-army-green-700 font-medium transition-colors group">
+                    class="flex items-center justify-center text-sm text-gray-600 hover:text-primary-700 font-medium transition-colors group">
                     <svg class="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" fill="none"
                         stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -220,7 +220,7 @@
 
             <!-- Footer Info -->
             <div class="mt-6 text-center">
-                <p class="text-army-green-100 text-sm">
+                <p class="text-primary-100 text-sm">
                     &copy; {{ date('Y') }} GBTS. All rights reserved.
                 </p>
             </div>

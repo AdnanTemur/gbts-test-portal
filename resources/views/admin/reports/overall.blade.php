@@ -8,7 +8,7 @@
         <div class="mb-8">
             <div class="flex items-center justify-between">
                 <div>
-                    <h1 class="text-3xl font-bold text-army-green-700">Overall Statistics Report</h1>
+                    <h1 class="text-3xl font-bold text-primary-700">Overall Statistics Report</h1>
                     <p class="text-gray-600 mt-1">Comprehensive performance overview and analytics</p>
                 </div>
                 <a href="{{ route('admin.reports.index') }}"

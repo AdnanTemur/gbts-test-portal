@@ -6,11 +6,11 @@
     <div class="mb-8">
         <div class="flex items-center justify-between">
             <div>
-                <h1 class="text-3xl font-bold text-army-green-700">Test Questions</h1>
+                <h1 class="text-3xl font-bold text-primary-700">Test Questions</h1>
                 <p class="text-gray-600 mt-1">Manage questions across all test sections</p>
             </div>
             <a href="{{ route('admin.questions.create') }}"
-                class="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-army-green-700 to-army-green-600 hover:from-army-green-800 hover:to-army-green-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5">
+                class="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-primary-700 to-primary-600 hover:from-primary-800 hover:to-primary-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                 </svg>
@@ -100,7 +100,7 @@
             </div>
 
             <select name="section_id"
-                class="px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-army-green-100 focus:border-army-green-600 outline-none">
+                class="px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 outline-none">
                 <option value="">All Sections</option>
                 @foreach($sections as $section)
                     <option value="{{ $section->id }}" {{ request('section_id') == $section->id ? 'selected' : '' }}>
@@ -110,7 +110,7 @@
             </select>
 
             <select name="question_type"
-                class="px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-army-green-100 focus:border-army-green-600 outline-none">
+                class="px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 outline-none">
                 <option value="">All Types</option>
                 <option value="mcq" {{ request('question_type') == 'mcq' ? 'selected' : '' }}>MCQ</option>
                 <option value="true_false" {{ request('question_type') == 'true_false' ? 'selected' : '' }}>True/False
@@ -119,7 +119,7 @@
             </select>
 
             <button type="submit"
-                class="inline-flex items-center px-4 py-2 text-sm bg-army-green-700 hover:bg-army-green-800 text-white font-medium rounded-lg transition-colors">
+                class="inline-flex items-center px-4 py-2 text-sm bg-primary-700 hover:bg-primary-800 text-white font-medium rounded-lg transition-colors">
                 <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -286,7 +286,7 @@
                                 <p class="mt-1 text-sm text-gray-500">Get started by creating a new question.</p>
                                 <div class="mt-6">
                                     <a href="{{ route('admin.questions.create') }}"
-                                        class="inline-flex items-center px-4 py-2 bg-army-green-700 text-white rounded-lg hover:bg-army-green-800 transition-colors">
+                                        class="inline-flex items-center px-4 py-2 bg-primary-700 text-white rounded-lg hover:bg-primary-800 transition-colors">
                                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M12 4v16m8-8H4" />

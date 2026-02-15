@@ -6,11 +6,11 @@
     <div class="mb-8">
         <div class="flex items-center justify-between">
             <div>
-                <h1 class="text-3xl font-bold text-army-green-700">Test Versions</h1>
+                <h1 class="text-3xl font-bold text-primary-700">Test Versions</h1>
                 <p class="text-gray-600 mt-1">Manage test configurations and versions</p>
             </div>
             <a href="{{ route('admin.test-versions.create') }}" 
-               class="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-army-green-700 to-army-green-600 hover:from-army-green-800 hover:to-army-green-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5">
+               class="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-primary-700 to-primary-600 hover:from-primary-800 hover:to-primary-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                 </svg>
@@ -220,7 +220,7 @@
                                 <p class="mt-1 text-sm text-gray-500">Get started by creating a new test version.</p>
                                 <div class="mt-6">
                                     <a href="{{ route('admin.test-versions.create') }}" 
-                                       class="inline-flex items-center px-4 py-2 bg-army-green-700 text-white rounded-lg hover:bg-army-green-800 transition-colors">
+                                       class="inline-flex items-center px-4 py-2 bg-primary-700 text-white rounded-lg hover:bg-primary-800 transition-colors">
                                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                                         </svg>

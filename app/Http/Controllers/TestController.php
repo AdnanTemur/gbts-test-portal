@@ -24,6 +24,11 @@ class TestController extends Controller
     {
         $testAttempt = TestAttempt::where('attempt_token', $token)->firstOrFail();
 
+        if ($testAttempt->status === 'in_progress' && session('active_test_token') !== $token) {
+            abort(403, 'This test is already active on another device or session.');
+        }
+
+
         if ($testAttempt->status === 'completed') {
             return redirect()->route('results.show', $token);
         }
@@ -38,6 +43,10 @@ class TestController extends Controller
     {
         $testAttempt = TestAttempt::where('attempt_token', $token)->firstOrFail();
 
+        if ($testAttempt->status === 'in_progress' && session('active_test_token') !== $token) {
+            abort(403, 'This test is already active on another device or session.');
+        }
+
         if ($testAttempt->status === 'completed') {
             return redirect()->route('results.show', $token);
         }
@@ -48,14 +57,24 @@ class TestController extends Controller
     /**
      * Begin the test (start first section)
      */
-    public function begin($token)
+    public function begin($token, Request $request)
     {
         $testAttempt = TestAttempt::where('attempt_token', $token)->firstOrFail();
-
         if ($testAttempt->status === 'not_started') {
+            // Start test normally
             $testAttempt->update([
                 'status' => 'in_progress',
                 'started_at' => now(),
+                'expires_at' => now()->addMinutes(
+                    $testAttempt->testVersion->section_time_limit * $testAttempt->testVersion->testSections->count()
+                ),
+                'device_fingerprint' => device_fingerprint($request),
+                'ip_address' => $request->ip(),
+            ]);
+
+            session([
+                'active_test_token' => $testAttempt->attempt_token,
+                'candidate_id' => $testAttempt->candidate_id,
             ]);
 
             // Start first section
@@ -66,10 +85,31 @@ class TestController extends Controller
                     'started_at' => now(),
                 ]);
             }
+
+            return redirect()->route('test.section', $token);
         }
 
-        return redirect()->route('test.section', $token);
+        if ($testAttempt->status === 'in_progress') {
+            // **Update IP and fingerprint even on refresh**
+            $testAttempt->update([
+                'device_fingerprint' => $testAttempt->device_fingerprint ?? device_fingerprint($request),
+                'ip_address' => $testAttempt->ip_address ?? $request->ip(),
+            ]);
+
+            // Restore session if missing
+            if (!session('active_test_token')) {
+                session([
+                    'active_test_token' => $testAttempt->attempt_token,
+                    'candidate_id' => $testAttempt->candidate_id,
+                ]);
+            }
+
+            return redirect()->route('test.section', $token);
+        }
+
+        abort(403, 'Test already completed.');
     }
+
 
     /**
      * Show current section
@@ -126,7 +166,9 @@ class TestController extends Controller
 
         // Calculate end time
         $endTime = $currentSection->started_at
+            ->copy()
             ->addMinutes($testAttempt->testVersion->section_time_limit);
+
 
         return view('test.section', compact(
             'testAttempt',
@@ -143,6 +185,11 @@ class TestController extends Controller
     public function saveAnswer(Request $request, $token)
     {
         $testAttempt = TestAttempt::where('attempt_token', $token)->firstOrFail();
+
+        if (session('candidate_id') !== $testAttempt->candidate_id) {
+            abort(403, 'Unauthorized submission.');
+        }
+
         $currentSection = $testAttempt->getCurrentSection();
 
         $validated = $request->validate([
@@ -202,11 +249,12 @@ class TestController extends Controller
     {
         $testAttempt = TestAttempt::where('attempt_token', $token)->firstOrFail();
 
-        // Store token in session for result access
+        session()->forget('active_test_token');
         session(['completed_test_token' => $testAttempt->attempt_token]);
 
         return $this->completeTest($testAttempt);
     }
+
 
     /**
      * Complete the test

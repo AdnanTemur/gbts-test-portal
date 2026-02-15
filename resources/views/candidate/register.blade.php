@@ -7,7 +7,7 @@
             <!-- Header -->
             <div class="text-center mb-8">
                 <div
-                    class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-army-green-700 to-army-green-600 rounded-full mb-4 shadow-lg">
+                    class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-700 to-primary-600 rounded-full mb-4 shadow-lg">
                     <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -20,7 +20,7 @@
             <!-- Registration Card -->
             <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
                 <!-- Card Header -->
-                <div class="px-8 py-5 bg-gradient-to-r from-army-green-700 to-army-green-600 border-b">
+                <div class="px-8 py-5 bg-gradient-to-r from-primary-700 to-primary-600 border-b">
                     <h2 class="text-lg font-semibold text-white">Personal Information</h2>
                     <p class="text-sm text-white/80 mt-1">Please fill in all required details accurately</p>
                 </div>
@@ -53,7 +53,7 @@
                                 Full Name <span class="text-red-500">*</span>
                             </label>
                             <input type="text" name="name" required
-                                class="w-full px-4 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-army-green-100 focus:border-army-green-600 outline-none transition-colors"
+                                class="w-full px-4 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 outline-none transition-colors"
                                 placeholder="Enter your full name as per CNIC">
                             <p class="text-xs text-gray-500 mt-1.5">Enter your complete name as it appears on official
                                 documents</p>
@@ -65,7 +65,7 @@
                                 Father's Name <span class="text-red-500">*</span>
                             </label>
                             <input type="text" name="father_name" required
-                                class="w-full px-4 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-army-green-100 focus:border-army-green-600 outline-none transition-colors"
+                                class="w-full px-4 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 outline-none transition-colors"
                                 placeholder="Enter father's name">
                         </div>
 
@@ -75,7 +75,7 @@
                                 Phone Number <span class="text-red-500">*</span>
                             </label>
                             <input type="text" name="phone" required
-                                class="w-full px-4 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-army-green-100 focus:border-army-green-600 outline-none transition-colors"
+                                class="w-full px-4 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 outline-none transition-colors"
                                 placeholder="03XX-XXXXXXX">
                             <p class="text-xs text-gray-500 mt-1.5">Enter a valid contact number</p>
                         </div>
@@ -86,7 +86,7 @@
                                 Email Address <span class="text-gray-400 text-xs">(Optional)</span>
                             </label>
                             <input type="email" name="email"
-                                class="w-full px-4 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-army-green-100 focus:border-army-green-600 outline-none transition-colors"
+                                class="w-full px-4 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 outline-none transition-colors"
                                 placeholder="your.email@example.com">
                             <p class="text-xs text-gray-500 mt-1.5">Optional - for receiving test results and notifications
                             </p>
@@ -104,7 +104,7 @@
                             </label>
                             <div class="mt-2">
                                 <input type="file" name="photo" accept="image/jpeg,image/jpg,image/png" id="photoInput"
-                                    class="block w-full text-sm text-gray-600 file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-army-green-50 file:text-army-green-700 hover:file:bg-army-green-100 file:cursor-pointer cursor-pointer border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-army-green-100 focus:border-army-green-600 outline-none transition-colors">
+                                    class="block w-full text-sm text-gray-600 file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100 file:cursor-pointer cursor-pointer border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 outline-none transition-colors">
                             </div>
                             <div class="mt-3 p-3 bg-blue-50 border-l-4 border-blue-400 rounded-r-lg">
                                 <div class="flex">
@@ -161,7 +161,7 @@
 
                     <!-- Submit Button -->
                     <button type="submit"
-                        class="w-full bg-gradient-to-r from-army-green-700 to-army-green-600 hover:from-army-green-800 hover:to-army-green-700 text-white font-bold py-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center">
+                        class="w-full bg-gradient-to-r from-primary-700 to-primary-600 hover:from-primary-800 hover:to-primary-700 text-white font-bold py-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />

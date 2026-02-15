@@ -8,7 +8,7 @@
         <div class="mb-6">
             <div class="flex items-center justify-between w-full">
                 <div>
-                    <h1 class="text-2xl font-bold text-army-green-700">Create Test Section</h1>
+                    <h1 class="text-2xl font-bold text-primary-700">Create Test Section</h1>
                     <p class="text-sm text-gray-600 mt-1">Add a new section to organize your test questions</p>
                 </div>
             </div>
@@ -17,7 +17,7 @@
         <!-- Form Card -->
         <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
             <!-- Card Header -->
-            <div class="px-5 py-3 bg-gradient-to-r from-army-green-700 to-army-green-600 border-b border-army-green-800">
+            <div class="px-5 py-3 bg-gradient-to-r from-primary-700 to-primary-600 border-b border-primary-800">
                 <h2 class="text-base font-semibold text-white">Section Details</h2>
             </div>
 
@@ -40,7 +40,7 @@
                             </div>
                             <input type="text" id="name" name="name" value="{{ old('name') }}" required
                                 placeholder="e.g., Verbal Reasoning"
-                                class="w-full pl-9 pr-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-army-green-100 focus:border-army-green-600 transition-all outline-none">
+                                class="w-full pl-9 pr-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 transition-all outline-none">
                         </div>
                         @error('name')
                             <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
@@ -61,7 +61,7 @@
                             </div>
                             <input type="number" id="display_order" name="display_order"
                                 value="{{ old('display_order', 0) }}" required min="0" placeholder="0"
-                                class="w-full pl-9 pr-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-army-green-100 focus:border-army-green-600 transition-all outline-none">
+                                class="w-full pl-9 pr-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 transition-all outline-none">
                         </div>
                         <p class="mt-1 text-xs text-gray-500">Order in which this section appears (0 = first)</p>
                         @error('display_order')
@@ -73,7 +73,7 @@
                     <div class="bg-gray-50 rounded-lg p-3 border border-gray-200">
                         <label class="flex items-center cursor-pointer">
                             <input type="checkbox" name="is_active" value="1" {{ old('is_active', true) ? 'checked' : '' }}
-                                class="w-4 h-4 text-army-green-700 border-gray-300 rounded focus:ring-army-green-600">
+                                class="w-4 h-4 text-primary-700 border-gray-300 rounded focus:ring-primary-600">
                             <span class="ml-2 text-sm font-medium text-gray-900">Mark as active</span>
                         </label>
                     </div>
@@ -90,7 +90,7 @@
                         Back
                     </a>
                     <button type="submit"
-                        class="inline-flex items-center px-5 py-2 text-sm bg-gradient-to-r from-army-green-700 to-army-green-600 hover:from-army-green-800 hover:to-army-green-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all">
+                        class="inline-flex items-center px-5 py-2 text-sm bg-gradient-to-r from-primary-700 to-primary-600 hover:from-primary-800 hover:to-primary-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all">
                         <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                         </svg>
