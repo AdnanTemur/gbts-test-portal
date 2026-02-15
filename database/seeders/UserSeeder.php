@@ -12,7 +12,7 @@ class UserSeeder extends Seeder
     {
         User::create([
             'name' => 'Super Admin',
-            'email' => 'admin@asrc.mil',
+            'email' => 'admin@gbtsportal.com',
             'password' => Hash::make('admin123'),
             'email_verified_at' => now(),
         ]);
