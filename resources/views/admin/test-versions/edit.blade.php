@@ -173,23 +173,75 @@
                 <h3 class="text-base font-bold text-gray-900 mb-1 pb-2 border-b border-gray-200">
                     Section Order <span class="text-red-500">*</span>
                 </h3>
-                <p class="text-xs text-gray-600 mb-3">Drag and drop to reorder sections</p>
-                
+                <p class="text-xs text-gray-600 mb-3">Check sections to include. Drag to reorder.</p>
+
+                @error('section_ids')
+                    <p class="mb-2 text-xs text-red-600">{{ $message }}</p>
+                @enderror
+
                 <div id="sectionsContainer" class="space-y-2">
                     @php
                         $currentSections = $testVersion->testSections->sortBy('pivot.section_order');
+                        $currentSectionIds = $currentSections->pluck('id')->toArray();
+                        $oldSectionIds = old('section_ids');
+
+                        // Determine which IDs to treat as selected
+                        $selectedIds = $oldSectionIds ?? $currentSectionIds;
+
+                        // Build ordered list: selected sections first (in their order), then unselected
+                        $selectedSections = $currentSections; // already ordered by pivot
+                        $unselectedSections = $sections->whereNotIn('id', $currentSectionIds);
                     @endphp
-                    @foreach($currentSections as $index => $section)
-                        <div class="flex items-center p-3 bg-gray-50 border-2 border-gray-300 rounded-lg cursor-move hover:border-primary-400 transition-colors" draggable="true">
-                            <svg class="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+                    {{-- Selected sections first (in saved order) --}}
+                    @foreach($selectedSections as $index => $section)
+                        <div class="flex items-center p-3 bg-gray-50 border-2 border-gray-300 rounded-lg hover:border-primary-400 transition-colors section-item"
+                            draggable="true"
+                            data-id="{{ $section->id }}">
+
+                            <svg class="drag-handle w-5 h-5 text-gray-400 mr-2 cursor-move" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"/>
                             </svg>
-                            <input type="hidden" name="section_ids[]" value="{{ $section->id }}">
+
+                            <input type="checkbox"
+                                name="section_ids[]"
+                                value="{{ $section->id }}"
+                                {{ in_array($section->id, $selectedIds) ? 'checked' : '' }}
+                                class="section-checkbox w-4 h-4 text-primary-700 border-gray-300 rounded focus:ring-primary-600 mr-3 cursor-pointer">
+
                             <div class="flex-1">
                                 <span class="text-sm font-semibold text-gray-900">{{ $section->name }}</span>
+                                <span class="text-xs text-gray-500 ml-2">({{ $section->activeQuestions()->count() }} questions)</span>
                             </div>
-                            <div class="flex items-center px-2.5 py-1 bg-primary-100 rounded-md">
-                                <span class="text-xs text-primary-800">Order: <span class="font-bold">{{ $index + 1 }}</span></span>
+
+                            <div class="order-badge flex items-center px-2.5 py-1 bg-primary-100 rounded-md">
+                                <span class="text-xs text-primary-800">Order: <span class="order-number font-bold">{{ $index + 1 }}</span></span>
+                            </div>
+                        </div>
+                    @endforeach
+
+                    {{-- Unselected sections at the bottom --}}
+                    @foreach($unselectedSections as $section)
+                        <div class="flex items-center p-3 bg-gray-50 border-2 border-gray-300 rounded-lg hover:border-primary-400 transition-colors section-item opacity-50"
+                            draggable="false"
+                            data-id="{{ $section->id }}">
+
+                            <svg class="drag-handle w-5 h-5 text-gray-300 mr-2 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"/>
+                            </svg>
+
+                            <input type="checkbox"
+                                name="section_ids[]"
+                                value="{{ $section->id }}"
+                                class="section-checkbox w-4 h-4 text-primary-700 border-gray-300 rounded focus:ring-primary-600 mr-3 cursor-pointer">
+
+                            <div class="flex-1">
+                                <span class="text-sm font-semibold text-gray-900">{{ $section->name }}</span>
+                                <span class="text-xs text-gray-500 ml-2">({{ $section->activeQuestions()->count() }} questions)</span>
+                            </div>
+
+                            <div class="order-badge flex items-center px-2.5 py-1 bg-gray-100 rounded-md">
+                                <span class="text-xs text-gray-500">Order: <span class="order-number font-bold">-</span></span>
                             </div>
                         </div>
                     @endforeach
@@ -236,38 +288,87 @@
 const container = document.getElementById('sectionsContainer');
 let draggedElement = null;
 
+// Toggle draggable and drag handle on checkbox change
+container.addEventListener('change', function(e) {
+    if (e.target.classList.contains('section-checkbox')) {
+        const item = e.target.closest('.section-item');
+        const handle = item.querySelector('.drag-handle');
+        const badge = item.querySelector('.order-badge');
+
+        if (e.target.checked) {
+            item.setAttribute('draggable', 'true');
+            item.classList.remove('opacity-50');
+            handle.classList.remove('hidden');
+            // Move to just before the first unchecked item
+            const firstUnchecked = [...container.querySelectorAll('.section-item')]
+                .find(el => !el.querySelector('.section-checkbox').checked);
+            if (firstUnchecked) {
+                container.insertBefore(item, firstUnchecked);
+            } else {
+                container.appendChild(item);
+            }
+        } else {
+            item.setAttribute('draggable', 'false');
+            item.classList.add('opacity-50');
+            handle.classList.add('hidden');
+            // Move to end
+            container.appendChild(item);
+        }
+
+        updateOrderNumbers();
+    }
+});
+
+// Drag events
 container.addEventListener('dragstart', function(e) {
-    if (e.target.draggable) {
-        draggedElement = e.target;
-        e.target.style.opacity = '0.5';
+    const item = e.target.closest('[draggable="true"]');
+    if (item) {
+        draggedElement = item;
+        setTimeout(() => item.style.opacity = '0.4', 0);
     }
 });
 
 container.addEventListener('dragend', function(e) {
-    if (e.target.draggable) {
-        e.target.style.opacity = '';
+    const item = e.target.closest('.section-item');
+    if (item) {
+        item.style.opacity = item.querySelector('.section-checkbox').checked ? '' : '0.5';
+        draggedElement = null;
     }
 });
 
 container.addEventListener('dragover', function(e) {
     e.preventDefault();
+    const overItem = e.target.closest('[draggable="true"]');
+    if (overItem && draggedElement && overItem !== draggedElement) {
+        const rect = overItem.getBoundingClientRect();
+        const midY = rect.top + rect.height / 2;
+        if (e.clientY < midY) {
+            container.insertBefore(draggedElement, overItem);
+        } else {
+            container.insertBefore(draggedElement, overItem.nextSibling);
+        }
+        updateOrderNumbers();
+    }
 });
 
 container.addEventListener('drop', function(e) {
     e.preventDefault();
-    if (e.target.closest('[draggable="true"]') && draggedElement) {
-        const dropTarget = e.target.closest('[draggable="true"]');
-        if (dropTarget && dropTarget !== draggedElement) {
-            container.insertBefore(draggedElement, dropTarget);
-            updateOrderNumbers();
-        }
-    }
 });
 
 function updateOrderNumbers() {
-    const items = container.querySelectorAll('[draggable="true"]');
-    items.forEach((item, index) => {
-        item.querySelector('span.font-bold').textContent = index + 1;
+    let order = 1;
+    container.querySelectorAll('.section-item').forEach(item => {
+        const badge = item.querySelector('.order-badge');
+        const orderNum = item.querySelector('.order-number');
+        if (item.querySelector('.section-checkbox').checked) {
+            orderNum.textContent = order++;
+            badge.className = 'order-badge flex items-center px-2.5 py-1 bg-primary-100 rounded-md';
+            badge.querySelector('span').className = 'text-xs text-primary-800';
+        } else {
+            orderNum.textContent = '-';
+            badge.className = 'order-badge flex items-center px-2.5 py-1 bg-gray-100 rounded-md';
+            badge.querySelector('span').className = 'text-xs text-gray-500';
+        }
     });
 }
 </script>
