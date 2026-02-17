@@ -86,7 +86,7 @@
             </div>
         </div>
 
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" id="tests">
             @if($testVersions->isEmpty())
                 <!-- Empty State -->
                 <div class="bg-white rounded-2xl shadow-lg p-12 text-center border border-gray-200">

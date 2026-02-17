@@ -112,7 +112,7 @@
 
     <!-- Table -->
     <div class="overflow-x-auto">
-        <table class="min-w-full divide-y divide-gray-200">
+        <table class="min-w-full divide-y divide-gray-200 w-full">
             <thead class="bg-gray-50">
                 <tr>
                     <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
@@ -167,10 +167,10 @@
                                 {{ $candidate->cnic }}
                             </span>
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
+                        <td class="px-6 py-4">
                             <div class="text-sm text-gray-900">{{ $candidate->phone }}</div>
                             @if($candidate->email)
-                                <div class="text-xs text-gray-500">{{ $candidate->email }}</div>
+                                <div class="text-xs text-gray-500 break-all">{{ $candidate->email }}</div>
                             @endif
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
