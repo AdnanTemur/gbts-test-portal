@@ -81,49 +81,49 @@
             </div>
         </div>
 
-        <!-- Section-wise Performance -->
-        <div class="bg-white rounded-lg shadow-md p-8 mb-6">
-            <h2 class="text-2xl font-bold text-gray-900 mb-6">Section-wise Performance</h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                @foreach($sectionStats as $stat)
-                    <div class="border-2 border-gray-200 rounded-lg p-6">
-                        <h3 class="font-bold text-lg text-gray-900 mb-4">{{ $stat['name'] }}</h3>
-
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-gray-600">Score</span>
-                            <span
-                                class="text-2xl font-bold {{ $stat['percentage'] >= 80 ? 'text-green-600' : ($stat['percentage'] >= 60 ? 'text-yellow-600' : 'text-red-600') }}">
-                                {{ $stat['percentage'] }}%
-                            </span>
-                        </div>
-
-                        <div class="w-full bg-gray-200 rounded-full h-3 mb-4">
-                            <div class="h-3 rounded-full {{ $stat['percentage'] >= 80 ? 'bg-green-600' : ($stat['percentage'] >= 60 ? 'bg-yellow-600' : 'bg-red-600') }}"
-                                style="width: {{ $stat['percentage'] }}%"></div>
-                        </div>
-
-                        <div class="grid grid-cols-3 gap-2 text-center text-sm">
-                            <div>
-                                <div class="font-bold text-green-600">{{ $stat['correct'] }}</div>
-                                <div class="text-gray-600">Correct</div>
-                            </div>
-                            <div>
-                                <div class="font-bold text-red-600">{{ $stat['incorrect'] }}</div>
-                                <div class="text-gray-600">Incorrect</div>
-                            </div>
-                            <div>
-                                <div class="font-bold text-gray-600">{{ $stat['unanswered'] }}</div>
-                                <div class="text-gray-600">Unanswered</div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-
-        <!-- Detailed Answers -->
         @auth
+            <!-- Section-wise Performance -->
+            <div class="bg-white rounded-lg shadow-md p-8 mb-6">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Section-wise Performance</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    @foreach($sectionStats as $stat)
+                        <div class="border-2 border-gray-200 rounded-lg p-6">
+                            <h3 class="font-bold text-lg text-gray-900 mb-4">{{ $stat['name'] }}</h3>
+
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-gray-600">Score</span>
+                                <span
+                                    class="text-2xl font-bold {{ $stat['percentage'] >= 80 ? 'text-green-600' : ($stat['percentage'] >= 60 ? 'text-yellow-600' : 'text-red-600') }}">
+                                    {{ $stat['percentage'] }}%
+                                </span>
+                            </div>
+
+                            <div class="w-full bg-gray-200 rounded-full h-3 mb-4">
+                                <div class="h-3 rounded-full {{ $stat['percentage'] >= 80 ? 'bg-green-600' : ($stat['percentage'] >= 60 ? 'bg-yellow-600' : 'bg-red-600') }}"
+                                    style="width: {{ $stat['percentage'] }}%"></div>
+                            </div>
+
+                            <div class="grid grid-cols-3 gap-2 text-center text-sm">
+                                <div>
+                                    <div class="font-bold text-green-600">{{ $stat['correct'] }}</div>
+                                    <div class="text-gray-600">Correct</div>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-red-600">{{ $stat['incorrect'] }}</div>
+                                    <div class="text-gray-600">Incorrect</div>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-gray-600">{{ $stat['unanswered'] }}</div>
+                                    <div class="text-gray-600">Unanswered</div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+            <!-- Detailed Answers -->
             <div class="bg-white rounded-lg shadow-md p-8 mb-6">
                 <h2 class="text-2xl font-bold text-gray-900 mb-6">Detailed Answers</h2>
 
