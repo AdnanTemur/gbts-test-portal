@@ -35,8 +35,6 @@ class TestVersionController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'section_time_limit' => 'required|integer|min:1',
-            'questions_per_section' => 'required|integer|min:1',
             'expected_candidates' => 'required|integer|min:1',
             'overlap_threshold' => 'required|integer|min:0|max:100',
             'pass_threshold' => 'required|integer|min:0|max:100',
@@ -45,16 +43,21 @@ class TestVersionController extends Controller
             'shuffle_options' => 'boolean',
             'section_ids' => 'required|array|min:1',
             'section_ids.*' => 'exists:test_sections,id',
+            'section_questions' => 'required|array',
+            'section_questions.*' => 'required|integer|min:1',
+            'section_time' => 'required|array',
+            'section_time.*' => 'required|integer|min:1',
         ]);
 
         $testVersion = TestVersion::create($validated);
 
-        // Attach sections with order
         foreach ($validated['section_ids'] as $order => $sectionId) {
             DB::table('version_sections')->insert([
                 'test_version_id' => $testVersion->id,
                 'test_section_id' => $sectionId,
                 'section_order' => $order,
+                'questions_per_section' => $request->input("section_questions.{$sectionId}"),
+                'time_limit' => $request->input("section_time.{$sectionId}"),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
@@ -68,7 +71,7 @@ class TestVersionController extends Controller
     {
         $testVersion->load('testSections', 'testAttempts');
         $metrics = $testVersion->calculateDistributionMetrics();
-        
+
         return view('admin.test-versions.show', compact('testVersion', 'metrics'));
     }
 
@@ -84,8 +87,6 @@ class TestVersionController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'section_time_limit' => 'required|integer|min:1',
-            'questions_per_section' => 'required|integer|min:1',
             'expected_candidates' => 'required|integer|min:1',
             'overlap_threshold' => 'required|integer|min:0|max:100',
             'pass_threshold' => 'required|integer|min:0|max:100',
@@ -94,18 +95,24 @@ class TestVersionController extends Controller
             'shuffle_options' => 'boolean',
             'section_ids' => 'required|array|min:1',
             'section_ids.*' => 'exists:test_sections,id',
+            'section_questions' => 'required|array',
+            'section_questions.*' => 'required|integer|min:1',
+            'section_time' => 'required|array',
+            'section_time.*' => 'required|integer|min:1',
         ]);
 
         $testVersion->update($validated);
 
-        // Re-sync sections
+        // Re-sync sections with per-section question counts and time limits
         DB::table('version_sections')->where('test_version_id', $testVersion->id)->delete();
-        
+
         foreach ($validated['section_ids'] as $order => $sectionId) {
             DB::table('version_sections')->insert([
                 'test_version_id' => $testVersion->id,
                 'test_section_id' => $sectionId,
                 'section_order' => $order,
+                'questions_per_section' => $request->input("section_questions.{$sectionId}"),
+                'time_limit' => $request->input("section_time.{$sectionId}"),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

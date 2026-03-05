@@ -23,7 +23,9 @@ class CandidateController extends Controller
      */
     public function index()
     {
-        $testVersions = TestVersion::where('status', 'active')->get();
+        $testVersions = TestVersion::where('status', 'active')
+            ->orderBy('id', 'desc')
+            ->get();
 
         return view('candidate.index', compact('testVersions'));
     }

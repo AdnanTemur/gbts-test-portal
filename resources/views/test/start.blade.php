@@ -1,7 +1,5 @@
 @extends('layouts.app')
-
 @section('title', 'Test Start - ' . config('app.name', 'GBTS Test Portal'))
-
 @section('content')
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="bg-white rounded-lg shadow-md p-8">
@@ -16,7 +14,6 @@
                     Version: {{ $testAttempt->testVersion->version_code }}
                 </p>
             </div>
-
             <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
                 <p class="text-blue-800 font-medium">
                     Hello, {{ $testAttempt->candidate->name }}!
@@ -25,7 +22,6 @@
                     You are about to begin the Test.
                 </p>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div class="bg-gray-50 p-6 rounded-lg text-center">
                     <div class="text-3xl font-bold text-primary-700 mb-2">
@@ -38,31 +34,34 @@
                         @endforeach
                     </div>
                 </div>
-
                 <div class="bg-gray-50 p-6 rounded-lg text-center">
                     <div class="text-3xl font-bold text-primary-700 mb-2">
-                        {{ $testAttempt->testVersion->questions_per_section }}
+                        {{ $testAttempt->testVersion->testSections->sum(fn($s) => $s->pivot->questions_per_section) }}
                     </div>
-                    <div class="text-gray-600">Questions per Section</div>
-                    <div class="text-sm text-gray-500 mt-2">
-                        Total:
-                        {{ $testAttempt->testVersion->questions_per_section * $testAttempt->testVersion->testSections->count() }}
-                        questions
+                    <div class="text-gray-600">Total Questions</div>
+                    <div class="text-sm text-gray-500 mt-3 text-left space-y-1">
+                        @foreach($testAttempt->testVersion->testSections as $section)
+                            <div class="flex justify-between">
+                                <span>{{ $section->name }}</span>
+                                <span class="font-medium">{{ $section->pivot->questions_per_section }} Qs</span>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
-
                 <div class="bg-gray-50 p-6 rounded-lg text-center">
                     <div class="text-3xl font-bold text-primary-700 mb-2">
-                        {{ $testAttempt->testVersion->section_time_limit }}
+                        {{ $testAttempt->testVersion->testSections->sum(fn($s) => $s->pivot->time_limit ?? 0) }} min
                     </div>
-                    <div class="text-gray-600">Minutes per Section</div>
-                    <div class="text-sm text-gray-500 mt-2">
-                        Total:
-                        {{ $testAttempt->testVersion->section_time_limit * $testAttempt->testVersion->testSections->count() }}
-                        minutes
+                    <div class="text-gray-600">Total Time</div>
+                    <div class="text-sm text-gray-500 mt-3 text-left space-y-1">
+                        @foreach($testAttempt->testVersion->testSections as $section)
+                            <div class="flex justify-between">
+                                <span>{{ $section->name }}</span>
+                                <span class="font-medium">{{ $section->pivot->time_limit }} min</span>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
-
                 <div class="bg-gray-50 p-6 rounded-lg text-center">
                     <div class="text-3xl font-bold text-primary-700 mb-2">
                         {{ $testAttempt->testVersion->pass_threshold }}%
@@ -73,7 +72,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="text-center">
                 <a href="{{ route('test.instructions', $testAttempt->attempt_token) }}"
                     class="inline-block bg-primary-700 hover:bg-primary-800 text-white font-bold py-4 px-12 rounded-lg text-lg transition-colors">

@@ -8,8 +8,8 @@
         <div class="relative h-screen w-full mb-12">
             <!-- Background Image -->
             <div class="absolute inset-0">
-                <img src="https://images.pexels.com/photos/31359466/pexels-photo-31359466.jpeg"
-                    alt="Mountains" class="w-full h-full object-cover">
+                <img src="https://images.pexels.com/photos/31359466/pexels-photo-31359466.jpeg" alt="Mountains"
+                    class="w-full h-full object-cover">
                 <!-- Dark Overlay -->
                 <div class="absolute inset-0 bg-black/50"></div>
                 <!-- Green Gradient Overlay -->
@@ -175,7 +175,7 @@
                                             </div>
                                         </div>
                                         <div class="text-3xl font-bold text-purple-900 mb-1">
-                                            {{ $testVersion->questions_per_section }}
+                                            {{ $testVersion->testSections->sum(fn($s) => $s->pivot->questions_per_section) }}
                                         </div>
                                         <div class="text-sm font-medium text-purple-700">Questions/Section</div>
                                     </div>
@@ -192,7 +192,7 @@
                                             </div>
                                         </div>
                                         <div class="text-3xl font-bold text-amber-900 mb-1">
-                                            {{ $testVersion->section_time_limit }}
+                                            {{ $testVersion->testSections->first()?->pivot->time_limit ?? '—' }}
                                         </div>
                                         <div class="text-sm font-medium text-amber-700">Minutes/Section</div>
                                     </div>
@@ -270,7 +270,7 @@
                                                 d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
                                         <span>Total Duration:
-                                            {{ $testVersion->testSections->count() * $testVersion->section_time_limit }}
+                                            {{ $testVersion->testSections->sum(fn($s) => $s->pivot->time_limit ?? 0) }}
                                             minutes</span>
                                     </div>
                                 </div>

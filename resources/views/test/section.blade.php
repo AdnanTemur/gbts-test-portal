@@ -38,10 +38,10 @@
                         <div class="mt-4 flex flex-wrap gap-2">
                             @foreach($questions as $index => $assignment)
                                 <button type="button" @click="currentQuestion = {{ $index }}" :class="{
-                                                                        'bg-primary-600 text-white': currentQuestion === {{ $index }},
-                                                                        'bg-green-100 text-green-700 border-green-300': currentQuestion !== {{ $index }} && isAnswered({{ $index }}),
-                                                                        'bg-white text-gray-700 border-gray-300': currentQuestion !== {{ $index }} && !isAnswered({{ $index }})
-                                                                    }"
+                                                                                        'bg-primary-600 text-white': currentQuestion === {{ $index }},
+                                                                                        'bg-green-100 text-green-700 border-green-300': currentQuestion !== {{ $index }} && isAnswered({{ $index }}),
+                                                                                        'bg-white text-gray-700 border-gray-300': currentQuestion !== {{ $index }} && !isAnswered({{ $index }})
+                                                                                    }"
                                     class="w-10 h-10 rounded-lg border-2 font-semibold text-sm transition-all hover:scale-110">
                                     {{ $index + 1 }}
                                 </button>
@@ -68,10 +68,16 @@
             </div>
 
             <!-- Question Card -->
+            @php
+                $currentSection = $testAttempt->getCurrentSection();
+                $questionsBefore = $testAttempt->testVersion->testSections
+                    ->filter(fn($s) => $s->pivot->section_order < $currentSection->section_order)
+                    ->sum(fn($s) => $s->pivot->questions_per_section);
+            @endphp
             @foreach($questions as $index => $assignment)
                 @php
                     $question = $assignment->question;
-                    $questionNumber = ($currentSection->section_order * $testAttempt->testVersion->questions_per_section) + $index + 1;
+                    $questionNumber = $questionsBefore + $index + 1;
                     $existingAnswer = $existingAnswers->get($question->id);
                 @endphp
 
@@ -97,7 +103,7 @@
                                 </span>
                                 <span
                                     class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold
-                                                                {{ $question->difficulty_level === 'easy' ? 'bg-green-100 text-green-800' :
+                                                                                {{ $question->difficulty_level === 'easy' ? 'bg-green-100 text-green-800' :
                 ($question->difficulty_level === 'medium' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800') }}">
                                     {{ ucfirst($question->difficulty_level) }}
                                 </span>
@@ -128,7 +134,7 @@
                                 @foreach($question->options as $optIndex => $option)
                                     <label
                                         class="flex items-start px-4 py-2 border-2 rounded-xl cursor-pointer transition-all hover:shadow-md
-                                                                                                    {{ $existingAnswer && $existingAnswer->selected_option_id == $option->id ? 'border-primary-600 bg-primary-50' : 'border-gray-300 hover:border-primary-300' }}"
+                                                                                                                                    {{ $existingAnswer && $existingAnswer->selected_option_id == $option->id ? 'border-primary-600 bg-primary-50' : 'border-gray-300 hover:border-primary-300' }}"
                                         @click="markAnswered({{ $index }})">
                                         <input type="radio" name="question_{{ $question->id }}" value="{{ $option->id }}" {{ $existingAnswer && $existingAnswer->selected_option_id == $option->id ? 'checked' : '' }}
                                             onchange="saveAnswer('{{ $testAttempt->attempt_token }}', {{ $question->id }}, { selected_option_id: {{ $option->id }} })"

@@ -66,7 +66,7 @@ class TestController extends Controller
                 'status' => 'in_progress',
                 'started_at' => now(),
                 'expires_at' => now()->addMinutes(
-                    $testAttempt->testVersion->section_time_limit * $testAttempt->testVersion->testSections->count()
+                    $testAttempt->testVersion->testSections->sum(fn($s) => $s->pivot->time_limit ?? $testAttempt->testVersion->section_time_limit)
                 ),
                 'device_fingerprint' => device_fingerprint($request),
                 'ip_address' => $request->ip(),
@@ -167,7 +167,7 @@ class TestController extends Controller
         // Calculate end time
         $endTime = $currentSection->started_at
             ->copy()
-            ->addMinutes($testAttempt->testVersion->section_time_limit);
+            ->addMinutes($currentSection->time_limit ?? $testAttempt->testVersion->section_time_limit);
 
 
         return view('test.section', compact(

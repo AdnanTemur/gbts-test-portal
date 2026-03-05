@@ -15,8 +15,6 @@ class TestVersion extends Model
         'version_code',
         'title',
         'description',
-        'section_time_limit',
-        'questions_per_section',
         'expected_candidates',
         'overlap_threshold',
         'pass_threshold',
@@ -53,7 +51,7 @@ class TestVersion extends Model
     public function testSections(): BelongsToMany
     {
         return $this->belongsToMany(TestSection::class, 'version_sections')
-            ->withPivot('section_order')
+            ->withPivot('section_order', 'questions_per_section', 'time_limit')
             ->orderBy('version_sections.section_order');
     }
 
@@ -76,11 +74,20 @@ class TestVersion extends Model
 
         foreach ($this->testSections as $section) {
             $totalQuestions = $section->activeQuestions()->count();
-            $questionsNeeded = $this->questions_per_section * $this->expected_candidates;
+            $questionsForSection = $section->pivot->questions_per_section;
+            $timeLimitForSection = $section->pivot->time_limit ?? $this->section_time_limit;
+
+            if (!$questionsForSection) {
+                continue; // skip misconfigured sections
+            }
+
+            $questionsNeeded = $questionsForSection * $this->expected_candidates;
 
             $sectionMetrics = [
                 'total_questions' => $totalQuestions,
                 'questions_needed' => $questionsNeeded,
+                'questions_per_section' => $questionsForSection,
+                'time_limit' => $timeLimitForSection,
             ];
 
             if ($totalQuestions >= $questionsNeeded) {
@@ -90,7 +97,7 @@ class TestVersion extends Model
                 $sectionMetrics['message'] = 'Sufficient questions for unique sets';
             } else {
                 // Will have overlap
-                $uniqueCandidates = floor($totalQuestions / $this->questions_per_section);
+                $uniqueCandidates = floor($totalQuestions / $questionsForSection);
                 $overlapPercentage = (($questionsNeeded - $totalQuestions) / $questionsNeeded) * 100;
 
                 $sectionMetrics['is_valid'] = $overlapPercentage <= $this->overlap_threshold;

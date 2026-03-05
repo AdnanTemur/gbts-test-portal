@@ -64,33 +64,27 @@
                 <div class="space-y-4">
                     <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <label for="section_time_limit" class="block text-sm font-semibold text-gray-700 mb-1.5">
-                                Time Limit/Section (min) <span class="text-red-500">*</span>
+                            <label for="qs_default_fill" class="block text-sm font-semibold text-gray-700 mb-1.5">
+                                Quick-fill Questions/Section
                             </label>
-                            <input type="number" 
-                                   id="section_time_limit" 
-                                   name="section_time_limit" 
-                                   value="{{ old('section_time_limit', 15) }}"
-                                   required
+                            <input type="number"
+                                   id="qs_default_fill"
                                    min="1"
-                                   placeholder="15"
+                                   placeholder="e.g. 10"
                                    class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 outline-none">
-                            <p class="text-xs text-gray-500 mt-1">Same time for all sections</p>
+                            <p class="text-xs text-gray-500 mt-1">Fills all blank section inputs below</p>
                         </div>
 
                         <div>
-                            <label for="questions_per_section" class="block text-sm font-semibold text-gray-700 mb-1.5">
-                                Questions/Section <span class="text-red-500">*</span>
+                            <label for="time_default_fill" class="block text-sm font-semibold text-gray-700 mb-1.5">
+                                Quick-fill Time/Section (min)
                             </label>
-                            <input type="number" 
-                                   id="questions_per_section" 
-                                   name="questions_per_section" 
-                                   value="{{ old('questions_per_section', 10) }}"
-                                   required
+                            <input type="number"
+                                   id="time_default_fill"
                                    min="1"
-                                   placeholder="10"
+                                   placeholder="e.g. 15"
                                    class="w-full px-3 py-2 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-100 focus:border-primary-600 outline-none">
-                            <p class="text-xs text-gray-500 mt-1">Same count for all sections</p>
+                            <p class="text-xs text-gray-500 mt-1">Fills all blank section inputs below</p>
                         </div>
                     </div>
 
@@ -170,7 +164,7 @@
                 <h3 class="text-base font-bold text-gray-900 mb-1 pb-2 border-b border-gray-200">
                     Section Order <span class="text-red-500">*</span>
                 </h3>
-                <p class="text-xs text-gray-600 mb-3">Check sections to include. Drag to reorder.</p>
+                <p class="text-xs text-gray-600 mb-3">Check sections to include. Drag to reorder. Set questions per section (leave blank to use default above).</p>
 
                 @error('section_ids')
                     <p class="mb-2 text-xs text-red-600">{{ $message }}</p>
@@ -178,12 +172,12 @@
 
                 <div id="sectionsContainer" class="space-y-2">
                     @foreach($sections as $index => $section)
-                        <div class="flex items-center p-3 bg-gray-50 border-2 border-gray-300 rounded-lg hover:border-primary-400 transition-colors section-item"
+                        <div class="flex items-center gap-2 p-3 bg-gray-50 border-2 border-gray-300 rounded-lg hover:border-primary-400 transition-colors section-item"
                             draggable="false"
                             data-id="{{ $section->id }}">
 
                             <!-- Drag Handle (only visible when checked) -->
-                            <svg class="drag-handle w-5 h-5 text-gray-300 mr-2 hidden cursor-move" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="drag-handle w-5 h-5 text-gray-300 mr-1 hidden cursor-move flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"/>
                             </svg>
 
@@ -192,14 +186,37 @@
                                 name="section_ids[]"
                                 value="{{ $section->id }}"
                                 {{ in_array($section->id, old('section_ids', $sections->pluck('id')->toArray())) ? 'checked' : '' }}
-                                class="section-checkbox w-4 h-4 text-primary-700 border-gray-300 rounded focus:ring-primary-600 mr-3 cursor-pointer">
+                                class="section-checkbox w-4 h-4 text-primary-700 border-gray-300 rounded focus:ring-primary-600 cursor-pointer flex-shrink-0">
 
-                            <div class="flex-1">
+                            <div class="flex-1 min-w-0">
                                 <span class="text-sm font-semibold text-gray-900">{{ $section->name }}</span>
-                                <span class="text-xs text-gray-500 ml-2">({{ $section->activeQuestions()->count() }} questions)</span>
+                                <span class="text-xs text-gray-500 ml-2">({{ $section->activeQuestions()->count() }} available)</span>
                             </div>
 
-                            <div class="order-badge flex items-center px-2.5 py-1 bg-primary-100 rounded-md">
+                            <!-- Per-section questions input -->
+                            <div class="flex items-center gap-1.5 flex-shrink-0">
+                                <label class="text-xs text-gray-500 whitespace-nowrap">Qs:</label>
+                                <input type="number"
+                                       name="section_questions[{{ $section->id }}]"
+                                       value="{{ old('section_questions.' . $section->id) }}"
+                                       min="1"
+                                       max="{{ $section->activeQuestions()->count() }}"
+                                       placeholder="required"
+                                       class="section-qs-input w-20 px-2 py-1 text-xs border-2 border-gray-300 rounded focus:ring-1 focus:ring-primary-100 focus:border-primary-500 outline-none">
+                            </div>
+
+                            <!-- Per-section time input -->
+                            <div class="flex items-center gap-1.5 flex-shrink-0">
+                                <label class="text-xs text-gray-500 whitespace-nowrap">Minutes:</label>
+                                <input type="number"
+                                       name="section_time[{{ $section->id }}]"
+                                       value="{{ old('section_time.' . $section->id) }}"
+                                       min="1"
+                                       placeholder="required"
+                                       class="section-time-input w-20 px-2 py-1 text-xs border-2 border-gray-300 rounded focus:ring-1 focus:ring-primary-100 focus:border-primary-500 outline-none">
+                            </div>
+
+                            <div class="order-badge flex items-center px-2.5 py-1 bg-primary-100 rounded-md flex-shrink-0">
                                 <span class="text-xs text-primary-800">Order: <span class="order-number font-bold">{{ $index + 1 }}</span></span>
                             </div>
                         </div>
@@ -246,7 +263,35 @@
 @push('scripts')
 <script>
 const container = document.getElementById('sectionsContainer');
+const defaultQsInput = document.getElementById('qs_default_fill');
+const defaultTimeInput = document.getElementById('time_default_fill');
 let draggedElement = null;
+
+// Quick-fill questions
+defaultQsInput.addEventListener('input', function() {
+    container.querySelectorAll('.section-qs-input').forEach(input => {
+        if (input.value === '') input.placeholder = this.value || 'required';
+    });
+});
+defaultQsInput.addEventListener('change', function() {
+    if (!this.value) return;
+    container.querySelectorAll('.section-qs-input').forEach(input => {
+        if (input.value === '') input.value = this.value;
+    });
+});
+
+// Quick-fill time
+defaultTimeInput.addEventListener('input', function() {
+    container.querySelectorAll('.section-time-input').forEach(input => {
+        if (input.value === '') input.placeholder = this.value || 'required';
+    });
+});
+defaultTimeInput.addEventListener('change', function() {
+    if (!this.value) return;
+    container.querySelectorAll('.section-time-input').forEach(input => {
+        if (input.value === '') input.value = this.value;
+    });
+});
 
 // Toggle draggable and drag handle based on checkbox
 container.addEventListener('change', function(e) {
@@ -319,7 +364,6 @@ container.addEventListener('drop', function(e) {
 });
 
 function updateOrderNumbers() {
-    // Only number the checked (active) items
     let order = 1;
     container.querySelectorAll('.section-item').forEach(item => {
         const badge = item.querySelector('.order-number');

@@ -15,6 +15,7 @@ class SectionAttempt extends Model
         'test_attempt_id',
         'test_section_id',
         'section_order',
+        'time_limit',
         'started_at',
         'completed_at',
         'time_taken',
@@ -90,7 +91,7 @@ class SectionAttempt extends Model
             return false;
         }
 
-        $timeLimit = $this->testAttempt->testVersion->section_time_limit;
+        $timeLimit = $this->time_limit ?? $this->testAttempt->testVersion->section_time_limit;
         $endTime = $this->started_at->addMinutes($timeLimit);
 
         return now()->greaterThan($endTime);

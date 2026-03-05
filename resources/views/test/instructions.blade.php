@@ -21,10 +21,18 @@
                     <ul class="list-disc list-inside space-y-2 text-gray-700">
                         <li>This test consists of <strong>{{ $testAttempt->testVersion->testSections->count() }}
                                 sections</strong></li>
-                        <li>Each section contains <strong>{{ $testAttempt->testVersion->questions_per_section }}
-                                questions</strong></li>
-                        <li>You have <strong>{{ $testAttempt->testVersion->section_time_limit }} minutes</strong> to
-                            complete each section</li>
+                        <li>Each section contains its own number of questions:
+                            @foreach($testAttempt->testVersion->testSections as $sec)
+                                <strong>{{ $sec->name }}</strong>
+                                ({{ $sec->pivot->questions_per_section }}){{ !$loop->last ? ', ' : '' }}
+                            @endforeach
+                        </li>
+                        <li>Time per section:
+                            @foreach($testAttempt->testVersion->testSections as $sec)
+                                <strong>{{ $sec->name }}</strong> ({{ $sec->pivot->time_limit }}
+                                min){{ !$loop->last ? ', ' : '' }}
+                            @endforeach
+                        </li>
                         <li>You must complete sections in the given order</li>
                         <li>Once you move to the next section, you <strong>cannot go back</strong></li>
                     </ul>

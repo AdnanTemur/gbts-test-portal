@@ -39,8 +39,8 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="text-sm text-gray-600">Questions/Section</p>
-                        <p class="text-2xl font-bold text-gray-900">{{ $testVersion->questions_per_section }}</p>
+                        <p class="text-sm text-gray-600">Total Questions</p>
+                        <p class="text-2xl font-bold text-gray-900">{{ $testVersion->testSections->sum(fn($s) => $s->pivot->questions_per_section) }}</p>
                     </div>
                 </div>
             </div>
@@ -136,7 +136,7 @@
                                 <div class="p-3 bg-white rounded-lg border border-gray-200">
                                     <div class="text-xs text-gray-600 mb-1">Questions Needed</div>
                                     <div class="text-xl font-bold text-gray-900">
-                                        {{ $testVersion->questions_per_section * $testVersion->expected_candidates }}</div>
+                                        {{ $metric['questions_needed'] }}</div>
                                 </div>
 
                                 @if(isset($metric['overlap_percentage']))
@@ -152,7 +152,7 @@
                                     <div class="p-3 bg-white rounded-lg border border-gray-200">
                                         <div class="text-xs text-gray-600 mb-1">Unique Users</div>
                                         <div class="text-xl font-bold text-gray-900">
-                                            {{ floor($metric['total_questions'] / $testVersion->questions_per_section) }}</div>
+                                            {{ floor($metric['total_questions'] / $metric['questions_per_section']) }}</div>
                                     </div>
                                 @else
                                     <div class="p-3 bg-white rounded-lg border-2 border-green-400">

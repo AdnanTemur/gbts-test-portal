@@ -15,36 +15,57 @@
     @include('components.public.navbar')
 
     <main class="flex-1">
-        @if(session('success'))
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4">
-                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">
-                    {{ session('success') }}
-                </div>
-            </div>
-        @endif
 
-        @if(session('error'))
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4">
-                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-                    {{ session('error') }}
-                </div>
-            </div>
-        @endif
+        <div class="fixed top-20 left-0 right-0 z-999 flex flex-col items-center gap-4">
 
-        @if(session('info'))
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4">
-                <div class="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded">
-                    {{ session('info') }}
+            @if(session('success'))
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4" id="alert-success">
+                    <div
+                        class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded flex items-center gap-4">
+                        <span>
+                            {{ session('success') }}
+                        </span>
+                        <button onclick="dismissAlert('alert-success')" class="font-bold text-lg leading-none">
+                            &times;
+                        </button>
+                    </div>
                 </div>
-            </div>
-        @endif
+            @endif
+
+            @if(session('error'))
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded flex items-center gap-4"
+                    id="alert-error">
+                    <span>
+                        {{ session('error') }}
+                    </span>
+                    <button onclick="dismissAlert('alert-error')" class="font-bold text-lg leading-none">
+                        &times;
+                    </button>
+                </div>
+            @endif
+
+            @if(session('info'))
+                <div class="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded flex items-center gap-4"
+                    id="alert-info">
+                    <span>
+                        {{ session('info') }}
+                    </span>
+                    <button onclick="dismissAlert('alert-info')" class="font-bold text-lg leading-none">
+                        &times;
+                    </button>
+                </div>
+            @endif
+
+        </div>
 
         @yield('content')
+
     </main>
 
     @include('components.public.footer')
 
     @stack('scripts')
+
 </body>
 
 </html>

@@ -92,7 +92,8 @@
                     <div>
                         <p class="text-sm text-gray-600">Completed</p>
                         <p class="text-2xl font-bold text-gray-900">
-                            {{ $candidate->testAttempts->where('status', 'completed')->count() }}</p>
+                            {{ $candidate->testAttempts->where('status', 'completed')->count() }}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -297,322 +298,322 @@
 
     @if($candidate->testAttempts->where('status', 'completed')->count() > 0)
         @if($candidate->testAttempts->where('status', 'completed')->count() > 0)
-    @push('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            
-            // Prepare data for charts
-            const completedAttempts = @json($candidate->testAttempts->where('status', 'completed')->values());
-            
-            // 1. Score Trend Chart
-            const scoreTrendOptions = {
-                series: [{
-                    name: 'Score',
-                    data: completedAttempts.map(attempt => attempt.percentage)
-                }],
-                chart: {
-                    type: 'line',
-                    height: 300,
-                    toolbar: { show: true }
-                },
-                colors: ['#15803d'],
-                stroke: {
-                    curve: 'smooth',
-                    width: 3
-                },
-                markers: {
-                    size: 5,
-                    strokeWidth: 2,
-                    fillOpacity: 1,
-                    strokeOpacity: 1
-                },
-                xaxis: {
-                    categories: completedAttempts.map((_, index) => 'Attempt ' + (index + 1)),
-                    title: { text: 'Test Attempts' }
-                },
-                yaxis: {
-                    title: { text: 'Score (%)' },
-                    min: 0,
-                    max: 100
-                },
-                grid: {
-                    borderColor: '#f1f1f1'
-                },
-                tooltip: {
-                    y: {
-                        formatter: function(val) {
-                            return val + '%'
-                        }
-                    }
-                }
-            };
-            const scoreTrendChart = new ApexCharts(document.querySelector("#scoreTrendChart"), scoreTrendOptions);
-            scoreTrendChart.render();
+            @push('scripts')
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
 
-            // 2. Pass/Fail Chart
-            const passedCount = completedAttempts.filter(attempt => attempt.passed).length;
-            const failedCount = completedAttempts.filter(attempt => !attempt.passed).length;
+                        // Prepare data for charts
+                        const completedAttempts = @json($candidate->testAttempts->where('status', 'completed')->values());
 
-            const passFailOptions = {
-                series: [passedCount, failedCount],
-                chart: {
-                    type: 'donut',
-                    height: 300
-                },
-                labels: ['Passed', 'Failed'],
-                colors: ['#16a34a', '#dc2626'],
-                legend: {
-                    position: 'bottom'
-                },
-                plotOptions: {
-                    pie: {
-                        donut: {
-                            size: '70%',
-                            labels: {
-                                show: true,
-                                total: {
-                                    show: true,
-                                    label: 'Total Tests',
-                                    formatter: function (w) {
-                                        return w.globals.seriesTotals.reduce((a, b) => a + b, 0)
+                        // 1. Score Trend Chart
+                        const scoreTrendOptions = {
+                            series: [{
+                                name: 'Score',
+                                data: completedAttempts.map(attempt => attempt.percentage)
+                            }],
+                            chart: {
+                                type: 'line',
+                                height: 300,
+                                toolbar: { show: true }
+                            },
+                            colors: ['#15803d'],
+                            stroke: {
+                                curve: 'smooth',
+                                width: 3
+                            },
+                            markers: {
+                                size: 5,
+                                strokeWidth: 2,
+                                fillOpacity: 1,
+                                strokeOpacity: 1
+                            },
+                            xaxis: {
+                                categories: completedAttempts.map((_, index) => 'Attempt ' + (index + 1)),
+                                title: { text: 'Test Attempts' }
+                            },
+                            yaxis: {
+                                title: { text: 'Score (%)' },
+                                min: 0,
+                                max: 100
+                            },
+                            grid: {
+                                borderColor: '#f1f1f1'
+                            },
+                            tooltip: {
+                                y: {
+                                    formatter: function (val) {
+                                        return val + '%'
                                     }
                                 }
                             }
-                        }
-                    }
-                },
-                dataLabels: {
-                    enabled: true,
-                    formatter: function(val, opts) {
-                        return opts.w.config.series[opts.seriesIndex]
-                    }
-                }
-            };
-            const passFailChart = new ApexCharts(document.querySelector("#passFailChart"), passFailOptions);
-            passFailChart.render();
+                        };
+                        const scoreTrendChart = new ApexCharts(document.querySelector("#scoreTrendChart"), scoreTrendOptions);
+                        scoreTrendChart.render();
 
-            // 3. Section-wise Performance Radar Chart
-            const sectionPerformance = {};
-            completedAttempts.forEach(attempt => {
-                if (attempt.section_attempts) {
-                    attempt.section_attempts.forEach(section => {
-                        const sectionName = section.test_section.name;
-                        if (!sectionPerformance[sectionName]) {
-                            sectionPerformance[sectionName] = {
-                                correct: 0,
-                                total: 0
+                        // 2. Pass/Fail Chart
+                        const passedCount = completedAttempts.filter(attempt => attempt.passed).length;
+                        const failedCount = completedAttempts.filter(attempt => !attempt.passed).length;
+
+                        const passFailOptions = {
+                            series: [passedCount, failedCount],
+                            chart: {
+                                type: 'donut',
+                                height: 300
+                            },
+                            labels: ['Passed', 'Failed'],
+                            colors: ['#16a34a', '#dc2626'],
+                            legend: {
+                                position: 'bottom'
+                            },
+                            plotOptions: {
+                                pie: {
+                                    donut: {
+                                        size: '70%',
+                                        labels: {
+                                            show: true,
+                                            total: {
+                                                show: true,
+                                                label: 'Total Tests',
+                                                formatter: function (w) {
+                                                    return w.globals.seriesTotals.reduce((a, b) => a + b, 0)
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            dataLabels: {
+                                enabled: true,
+                                formatter: function (val, opts) {
+                                    return opts.w.config.series[opts.seriesIndex]
+                                }
+                            }
+                        };
+                        const passFailChart = new ApexCharts(document.querySelector("#passFailChart"), passFailOptions);
+                        passFailChart.render();
+
+                        // 3. Section-wise Performance Radar Chart
+                        const sectionPerformance = {};
+                        completedAttempts.forEach(attempt => {
+                            if (attempt.section_attempts) {
+                                attempt.section_attempts.forEach(section => {
+                                    const sectionName = section.test_section.name;
+                                    if (!sectionPerformance[sectionName]) {
+                                        sectionPerformance[sectionName] = {
+                                            correct: 0,
+                                            total: 0
+                                        };
+                                    }
+                                    sectionPerformance[sectionName].correct += section.correct_answers;
+                                    sectionPerformance[sectionName].total += section.total_questions;
+                                });
+                            }
+                        });
+
+                        const sectionLabels = Object.keys(sectionPerformance);
+                        const sectionScores = sectionLabels.map(label => {
+                            const perf = sectionPerformance[label];
+                            return Math.round((perf.correct / perf.total) * 100);
+                        });
+
+                        const sectionRadarOptions = {
+                            series: [{
+                                name: 'Accuracy',
+                                data: sectionScores
+                            }],
+                            chart: {
+                                type: 'radar',
+                                height: 350,
+                                toolbar: { show: false }
+                            },
+                            colors: ['#2563eb'],
+                            xaxis: {
+                                categories: sectionLabels
+                            },
+                            yaxis: {
+                                min: 0,
+                                max: 100,
+                                tickAmount: 5
+                            },
+                            fill: {
+                                opacity: 0.2
+                            },
+                            markers: {
+                                size: 4
+                            },
+                            tooltip: {
+                                y: {
+                                    formatter: function (val) {
+                                        return val + '%'
+                                    }
+                                }
+                            }
+                        };
+                        const sectionRadarChart = new ApexCharts(document.querySelector("#sectionRadarChart"), sectionRadarOptions);
+                        sectionRadarChart.render();
+
+                        // 4. Difficulty Level Performance
+                        const difficultyPerformance = {
+                            easy: { correct: 0, total: 0 },
+                            medium: { correct: 0, total: 0 },
+                            hard: { correct: 0, total: 0 }
+                        };
+
+                        completedAttempts.forEach(attempt => {
+                            if (attempt.answers) {
+                                attempt.answers.forEach(answer => {
+                                    const diff = answer.question.difficulty_level;
+                                    if (difficultyPerformance[diff]) {
+                                        difficultyPerformance[diff].total++;
+                                        if (answer.is_correct) {
+                                            difficultyPerformance[diff].correct++;
+                                        }
+                                    }
+                                });
+                            }
+                        });
+
+                        const difficultyData = ['easy', 'medium', 'hard'].map(level => {
+                            const perf = difficultyPerformance[level];
+                            return perf.total > 0 ? Math.round((perf.correct / perf.total) * 100) : 0;
+                        });
+
+                        const difficultyOptions = {
+                            series: [{
+                                name: 'Accuracy',
+                                data: difficultyData
+                            }],
+                            chart: {
+                                type: 'bar',
+                                height: 350,
+                                toolbar: { show: false }
+                            },
+                            colors: ['#16a34a', '#eab308', '#dc2626'],
+                            plotOptions: {
+                                bar: {
+                                    distributed: true,
+                                    borderRadius: 8,
+                                    dataLabels: {
+                                        position: 'top'
+                                    }
+                                }
+                            },
+                            dataLabels: {
+                                enabled: true,
+                                formatter: function (val) {
+                                    return val + "%";
+                                },
+                                offsetY: -20,
+                                style: {
+                                    fontSize: '12px',
+                                    colors: ["#304758"]
+                                }
+                            },
+                            xaxis: {
+                                categories: ['Easy', 'Medium', 'Hard'],
+                                labels: {
+                                    style: {
+                                        fontSize: '12px'
+                                    }
+                                }
+                            },
+                            yaxis: {
+                                min: 0,
+                                max: 100,
+                                title: {
+                                    text: 'Accuracy (%)'
+                                }
+                            },
+                            legend: {
+                                show: false
+                            },
+                            grid: {
+                                borderColor: '#f1f1f1'
+                            }
+                        };
+                        const difficultyChart = new ApexCharts(document.querySelector("#difficultyChart"), difficultyOptions);
+                        difficultyChart.render();
+
+                        // 5. Time Management Chart
+                        const latestAttempt = completedAttempts[completedAttempts.length - 1];
+                        if (latestAttempt && latestAttempt.section_attempts) {
+                            const timeData = latestAttempt.section_attempts.map(section => {
+                                const timeSpent = section.time_taken / 60; // Convert to minutes
+                                const timeAllocated = section.time_limit ?? latestAttempt.test_version.section_time_limit;
+                                return {
+                                    section: section.test_section.name,
+                                    spent: Math.round(timeSpent),
+                                    allocated: timeAllocated
+                                };
+                            });
+
+                            const timeManagementOptions = {
+                                series: [
+                                    {
+                                        name: 'Time Spent',
+                                        data: timeData.map(d => d.spent)
+                                    },
+                                    {
+                                        name: 'Time Allocated',
+                                        data: timeData.map(d => d.allocated)
+                                    }
+                                ],
+                                chart: {
+                                    type: 'bar',
+                                    height: 350,
+                                    toolbar: { show: false }
+                                },
+                                colors: ['#3b82f6', '#10b981'],
+                                plotOptions: {
+                                    bar: {
+                                        horizontal: false,
+                                        columnWidth: '55%',
+                                        borderRadius: 5
+                                    }
+                                },
+                                dataLabels: {
+                                    enabled: false
+                                },
+                                stroke: {
+                                    show: true,
+                                    width: 2,
+                                    colors: ['transparent']
+                                },
+                                xaxis: {
+                                    categories: timeData.map(d => d.section),
+                                    title: {
+                                        text: 'Test Sections'
+                                    }
+                                },
+                                yaxis: {
+                                    title: {
+                                        text: 'Time (minutes)'
+                                    }
+                                },
+                                fill: {
+                                    opacity: 1
+                                },
+                                tooltip: {
+                                    y: {
+                                        formatter: function (val) {
+                                            return val + " min"
+                                        }
+                                    }
+                                },
+                                legend: {
+                                    position: 'top',
+                                    horizontalAlign: 'right'
+                                },
+                                grid: {
+                                    borderColor: '#f1f1f1'
+                                }
                             };
-                        }
-                        sectionPerformance[sectionName].correct += section.correct_answers;
-                        sectionPerformance[sectionName].total += section.total_questions;
-                    });
-                }
-            });
-
-            const sectionLabels = Object.keys(sectionPerformance);
-            const sectionScores = sectionLabels.map(label => {
-                const perf = sectionPerformance[label];
-                return Math.round((perf.correct / perf.total) * 100);
-            });
-
-            const sectionRadarOptions = {
-                series: [{
-                    name: 'Accuracy',
-                    data: sectionScores
-                }],
-                chart: {
-                    type: 'radar',
-                    height: 350,
-                    toolbar: { show: false }
-                },
-                colors: ['#2563eb'],
-                xaxis: {
-                    categories: sectionLabels
-                },
-                yaxis: {
-                    min: 0,
-                    max: 100,
-                    tickAmount: 5
-                },
-                fill: {
-                    opacity: 0.2
-                },
-                markers: {
-                    size: 4
-                },
-                tooltip: {
-                    y: {
-                        formatter: function(val) {
-                            return val + '%'
-                        }
-                    }
-                }
-            };
-            const sectionRadarChart = new ApexCharts(document.querySelector("#sectionRadarChart"), sectionRadarOptions);
-            sectionRadarChart.render();
-
-            // 4. Difficulty Level Performance
-            const difficultyPerformance = { 
-                easy: {correct: 0, total: 0}, 
-                medium: {correct: 0, total: 0}, 
-                hard: {correct: 0, total: 0} 
-            };
-            
-            completedAttempts.forEach(attempt => {
-                if (attempt.answers) {
-                    attempt.answers.forEach(answer => {
-                        const diff = answer.question.difficulty_level;
-                        if (difficultyPerformance[diff]) {
-                            difficultyPerformance[diff].total++;
-                            if (answer.is_correct) {
-                                difficultyPerformance[diff].correct++;
-                            }
+                            const timeManagementChart = new ApexCharts(document.querySelector("#timeManagementChart"), timeManagementOptions);
+                            timeManagementChart.render();
                         }
                     });
-                }
-            });
-
-            const difficultyData = ['easy', 'medium', 'hard'].map(level => {
-                const perf = difficultyPerformance[level];
-                return perf.total > 0 ? Math.round((perf.correct / perf.total) * 100) : 0;
-            });
-
-            const difficultyOptions = {
-                series: [{
-                    name: 'Accuracy',
-                    data: difficultyData
-                }],
-                chart: {
-                    type: 'bar',
-                    height: 350,
-                    toolbar: { show: false }
-                },
-                colors: ['#16a34a', '#eab308', '#dc2626'],
-                plotOptions: {
-                    bar: {
-                        distributed: true,
-                        borderRadius: 8,
-                        dataLabels: {
-                            position: 'top'
-                        }
-                    }
-                },
-                dataLabels: {
-                    enabled: true,
-                    formatter: function (val) {
-                        return val + "%";
-                    },
-                    offsetY: -20,
-                    style: {
-                        fontSize: '12px',
-                        colors: ["#304758"]
-                    }
-                },
-                xaxis: {
-                    categories: ['Easy', 'Medium', 'Hard'],
-                    labels: {
-                        style: {
-                            fontSize: '12px'
-                        }
-                    }
-                },
-                yaxis: {
-                    min: 0,
-                    max: 100,
-                    title: {
-                        text: 'Accuracy (%)'
-                    }
-                },
-                legend: {
-                    show: false
-                },
-                grid: {
-                    borderColor: '#f1f1f1'
-                }
-            };
-            const difficultyChart = new ApexCharts(document.querySelector("#difficultyChart"), difficultyOptions);
-            difficultyChart.render();
-
-            // 5. Time Management Chart
-            const latestAttempt = completedAttempts[completedAttempts.length - 1];
-            if (latestAttempt && latestAttempt.section_attempts) {
-                const timeData = latestAttempt.section_attempts.map(section => {
-                    const timeSpent = section.time_taken / 60; // Convert to minutes
-                    const timeAllocated = latestAttempt.test_version.section_time_limit;
-                    return {
-                        section: section.test_section.name,
-                        spent: Math.round(timeSpent),
-                        allocated: timeAllocated
-                    };
-                });
-
-                const timeManagementOptions = {
-                    series: [
-                        {
-                            name: 'Time Spent',
-                            data: timeData.map(d => d.spent)
-                        },
-                        {
-                            name: 'Time Allocated',
-                            data: timeData.map(d => d.allocated)
-                        }
-                    ],
-                    chart: {
-                        type: 'bar',
-                        height: 350,
-                        toolbar: { show: false }
-                    },
-                    colors: ['#3b82f6', '#10b981'],
-                    plotOptions: {
-                        bar: {
-                            horizontal: false,
-                            columnWidth: '55%',
-                            borderRadius: 5
-                        }
-                    },
-                    dataLabels: {
-                        enabled: false
-                    },
-                    stroke: {
-                        show: true,
-                        width: 2,
-                        colors: ['transparent']
-                    },
-                    xaxis: {
-                        categories: timeData.map(d => d.section),
-                        title: {
-                            text: 'Test Sections'
-                        }
-                    },
-                    yaxis: {
-                        title: {
-                            text: 'Time (minutes)'
-                        }
-                    },
-                    fill: {
-                        opacity: 1
-                    },
-                    tooltip: {
-                        y: {
-                            formatter: function (val) {
-                                return val + " min"
-                            }
-                        }
-                    },
-                    legend: {
-                        position: 'top',
-                        horizontalAlign: 'right'
-                    },
-                    grid: {
-                        borderColor: '#f1f1f1'
-                    }
-                };
-                const timeManagementChart = new ApexCharts(document.querySelector("#timeManagementChart"), timeManagementOptions);
-                timeManagementChart.render();
-            }
-        });
-    </script>
-    @endpush
-@endif
+                </script>
+            @endpush
+        @endif
     @endif
 @endsection
