@@ -199,6 +199,7 @@
                                 <input type="number"
                                        name="section_questions[{{ $section->id }}]"
                                        value="{{ old('section_questions.' . $section->id) }}"
+                                       required
                                        min="1"
                                        max="{{ $section->activeQuestions()->count() }}"
                                        placeholder="required"
@@ -211,6 +212,7 @@
                                 <input type="number"
                                        name="section_time[{{ $section->id }}]"
                                        value="{{ old('section_time.' . $section->id) }}"
+                                       required
                                        min="1"
                                        placeholder="required"
                                        class="section-time-input w-20 px-2 py-1 text-xs border-2 border-gray-300 rounded focus:ring-1 focus:ring-primary-100 focus:border-primary-500 outline-none">
