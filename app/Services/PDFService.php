@@ -7,6 +7,24 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class PDFService
 {
+
+    /**
+     * Generate formal merit list PDF
+     */
+    public function generateMeritList(array $data)
+    {
+        $pdf = Pdf::loadView('pdf.merit-list', array_merge($data, ['isPdf' => true]))
+            ->setPaper('a4', 'landscape')
+            ->setOption('defaultFont', 'sans-serif')
+            ->setOption('isHtml5ParserEnabled', true)
+            ->setOption('isRemoteEnabled', true)
+            ->setOption('dpi', 150);
+
+        $filename = 'merit_list_' . str_replace(' ', '_', $data['testVersion']->version_code) . '_' . now()->format('Ymd') . '.pdf';
+
+        return $pdf->download($filename);
+    }
+
     /**
      * Generate PDF certificate for test attempt
      */
@@ -25,7 +43,7 @@ class PDFService
                 'name' => $sectionAttempt->testSection->name,
                 'correct' => $sectionAttempt->correct_answers,
                 'total' => $sectionAttempt->total_questions,
-                'percentage' => $sectionAttempt->total_questions > 0 
+                'percentage' => $sectionAttempt->total_questions > 0
                     ? round(($sectionAttempt->correct_answers / $sectionAttempt->total_questions) * 100, 2)
                     : 0,
             ];

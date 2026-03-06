@@ -12,6 +12,93 @@ use Illuminate\Support\Facades\DB;
 
 class ReportService
 {
+
+    /**
+     * Get merit list for a test version with ranking and filters
+     */
+    public function getMeritList($testVersionId, $filters = [])
+    {
+        $testVersion = TestVersion::with([
+            'testSections' => function ($q) {
+                $q->orderBy('version_sections.section_order');
+            }
+        ])->findOrFail($testVersionId);
+
+        $query = TestAttempt::with([
+            'candidate',
+            'sectionAttempts.testSection',
+        ])
+            ->where('test_version_id', $testVersionId)
+            ->where('status', 'completed');
+
+        if (!empty($filters['date_from'])) {
+            $query->whereDate('completed_at', '>=', $filters['date_from']);
+        }
+
+        if (!empty($filters['date_to'])) {
+            $query->whereDate('completed_at', '<=', $filters['date_to']);
+        }
+
+        if (isset($filters['result']) && $filters['result'] !== 'all') {
+            $query->where('passed', $filters['result'] === 'passed');
+        }
+
+        // Ranking: percentage DESC, score DESC, time_taken ASC, name ASC
+        $attempts = $query
+            ->orderByDesc('percentage')
+            ->orderByDesc('score')
+            ->orderBy('time_taken')
+            ->join('candidates', 'candidates.id', '=', 'test_attempts.candidate_id')
+            ->orderBy('candidates.name')
+            ->select('test_attempts.*')
+            ->get();
+
+        // Build ranked rows
+        $ranked = $attempts->map(function ($attempt, $index) use ($testVersion) {
+            $sectionScores = [];
+            foreach ($testVersion->testSections as $section) {
+                $sa = $attempt->sectionAttempts->firstWhere('test_section_id', $section->id);
+                $sectionScores[$section->id] = $sa ? [
+                    'correct' => $sa->correct_answers,
+                    'total' => $sa->total_questions,
+                    'percentage' => $sa->total_questions > 0
+                        ? round(($sa->correct_answers / $sa->total_questions) * 100, 1)
+                        : 0,
+                ] : null;
+            }
+
+            return [
+                'rank' => $index + 1,
+                'attempt' => $attempt,
+                'candidate' => $attempt->candidate,
+                'percentage' => $attempt->percentage,
+                'score' => $attempt->score,
+                'total_questions' => $attempt->total_questions,
+                'time_taken' => $attempt->time_taken,
+                'passed' => $attempt->passed,
+                'completed_at' => $attempt->completed_at,
+                'section_scores' => $sectionScores,
+            ];
+        });
+
+        $summary = [
+            'total' => $ranked->count(),
+            'passed' => $ranked->where('passed', true)->count(),
+            'failed' => $ranked->where('passed', false)->count(),
+            'average' => $ranked->avg('percentage') ? round($ranked->avg('percentage'), 1) : 0,
+            'highest' => $ranked->max('percentage') ?? 0,
+            'lowest' => $ranked->min('percentage') ?? 0,
+        ];
+
+        return [
+            'testVersion' => $testVersion,
+            'sections' => $testVersion->testSections,
+            'ranked' => $ranked,
+            'summary' => $summary,
+            'filters' => $filters,
+        ];
+    }
+
     /**
      * Get candidate-wise report
      */

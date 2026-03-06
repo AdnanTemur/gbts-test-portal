@@ -70,4 +70,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('reports/candidate-wise', [ReportController::class, 'candidateWise'])->name('reports.candidate-wise');
     Route::get('reports/category-wise', [ReportController::class, 'categoryWise'])->name('reports.category-wise');
     Route::get('reports/overall', [ReportController::class, 'overall'])->name('reports.overall');
+    Route::get('reports/merit-list', [ReportController::class, 'meritList'])->name('reports.merit-list');
+    Route::get('reports/merit-list/pdf', [ReportController::class, 'meritListPdf'])->name('reports.merit-list.pdf');
+    Route::get('reports/merit-list/view', [ReportController::class, 'viewMeritList'])->name('reports.merit-list.view');
+
 });

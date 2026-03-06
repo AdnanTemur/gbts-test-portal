@@ -3,17 +3,17 @@
 @section('title', config('app.name', 'GBTS Test Portal') . ' - Home')
 
 @section('content')
-    <div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div class="min-h-screen bg-linear-to-br from-gray-50 to-gray-100">
         <!-- Hero Section -->
         <div class="relative h-screen w-full mb-12">
             <!-- Background Image -->
             <div class="absolute inset-0">
-                <img src="https://images.pexels.com/photos/31359466/pexels-photo-31359466.jpeg" alt="Mountains"
+                <img src="https://images.pexels.com/photos/6683392/pexels-photo-6683392.jpeg" alt="Mountains"
                     class="w-full h-full object-cover">
                 <!-- Dark Overlay -->
                 <div class="absolute inset-0 bg-black/50"></div>
                 <!-- Green Gradient Overlay -->
-                <div class="absolute inset-0 bg-gradient-to-t from-primary-900/80 via-transparent to-transparent"></div>
+                <div class="absolute inset-0 bg-linear-to-t from-primary-900/80 via-transparent to-transparent"></div>
             </div>
 
             <!-- Hero Content -->
@@ -111,7 +111,7 @@
                         <div
                             class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow duration-300">
                             <!-- Header -->
-                            <div class="bg-gradient-to-r from-primary-700 to-primary-600 px-8 py-6">
+                            <div class="bg-linear-to-r from-primary-700 to-primary-600 px-8 py-6">
                                 <div class="flex items-start justify-between">
                                     <div>
                                         <h3 class="text-3xl font-bold text-white mb-2">{{ $testVersion->title }}</h3>
@@ -147,7 +147,7 @@
                                 <!-- Stats Grid -->
                                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                                     <div
-                                        class="bg-gradient-to-br from-blue-50 to-blue-100 px-5 py-3 rounded-xl border border-blue-200">
+                                        class="bg-linear-to-br from-blue-50 to-blue-100 px-5 py-3 rounded-xl border border-blue-200">
                                         <div class="flex items-center mb-2">
                                             <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center mr-3">
                                                 <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor"
@@ -164,7 +164,7 @@
                                     </div>
 
                                     <div
-                                        class="bg-gradient-to-br from-purple-50 to-purple-100 px-5 py-3 rounded-xl border border-purple-200">
+                                        class="bg-linear-to-br from-purple-50 to-purple-100 px-5 py-3 rounded-xl border border-purple-200">
                                         <div class="flex items-center mb-2">
                                             <div class="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center mr-3">
                                                 <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor"
@@ -181,7 +181,7 @@
                                     </div>
 
                                     <div
-                                        class="bg-gradient-to-br from-amber-50 to-amber-100 px-5 py-3 rounded-xl border border-amber-200">
+                                        class="bg-linear-to-br from-amber-50 to-amber-100 px-5 py-3 rounded-xl border border-amber-200">
                                         <div class="flex items-center mb-2">
                                             <div class="w-8 h-8 bg-amber-600 rounded-lg flex items-center justify-center mr-3">
                                                 <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor"
@@ -198,7 +198,7 @@
                                     </div>
 
                                     <div
-                                        class="bg-gradient-to-br from-green-50 to-green-100 px-5 py-3 rounded-xl border border-green-200">
+                                        class="bg-linear-to-br from-green-50 to-green-100 px-5 py-3 rounded-xl border border-green-200">
                                         <div class="flex items-center mb-2">
                                             <div class="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center mr-3">
                                                 <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor"
@@ -240,7 +240,7 @@
                                         </div>
 
                                         <button type="submit"
-                                            class="w-full bg-gradient-to-r from-primary-700 to-primary-600 hover:from-primary-800 hover:to-primary-700 text-white font-bold py-2 px-6 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center group">
+                                            class="w-full bg-linear-to-r from-primary-700 to-primary-600 hover:from-primary-800 hover:to-primary-700 text-white font-bold py-2 px-6 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center group">
                                             <span class="text-lg">Start Test</span>
                                             <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none"
                                                 stroke="currentColor" viewBox="0 0 24 24">
